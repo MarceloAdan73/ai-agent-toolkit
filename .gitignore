@@ -43,7 +43,8 @@ REVIEW.md
 REFACTOR.md
 SECURITY_AUDIT.md
 *.docs.md
-*.test.ts
-!tests/
 *.refactor.md
 *.security.md
+
+# Ignore generated test files ONLY at root (not in tests/ directories)
+/*.test.ts
