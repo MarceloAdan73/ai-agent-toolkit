@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+*.log
+.refactor-cache.json
+.aicode.json
+REFACTOR.md
+*.refactor.md

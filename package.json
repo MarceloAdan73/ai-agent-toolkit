@@ -1,0 +1,33 @@
+{
+  "name": "ai-agent-toolkit",
+  "version": "1.0.0",
+  "description": "Monorepo de agentes de IA para automatizar tareas de desarrollo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "agent-doc-generator",
+    "agent-test-generator",
+    "agent-code-review",
+    "agent-refactor",
+    "agent-security-audit",
+    "toolkit"
+  ],
+  "scripts": {
+    "build": "npm -ws run build",
+    "test": "npm -ws --if-present run test",
+    "typecheck": "npm -ws run typecheck",
+    "test:integration": "npm -ws --if-present run test:integration",
+    "doc": "node toolkit/dist/cli.js doc --path .",
+    "review": "node toolkit/dist/cli.js review --path .",
+    "test-gen": "node toolkit/dist/cli.js test --path .",
+    "refactor": "node toolkit/dist/cli.js refactor --path .",
+    "audit": "node toolkit/dist/cli.js audit --path ."
+  },
+  "author": "Marcelo Adán",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+  },
+  "homepage": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+}

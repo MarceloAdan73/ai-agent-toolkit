@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        agent:
+          - agent-doc-generator
+          - agent-test-generator
+          - agent-code-review
+          - agent-refactor
+          - agent-security-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run typecheck -w ${{ matrix.agent }}
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        agent:
+          - agent-doc-generator
+          - agent-test-generator
+          - agent-code-review
+          - agent-refactor
+          - agent-security-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test -w ${{ matrix.agent }}
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        agent:
+          - agent-doc-generator
+          - agent-test-generator
+          - agent-code-review
+          - agent-refactor
+          - agent-security-audit
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -w ${{ matrix.agent }}

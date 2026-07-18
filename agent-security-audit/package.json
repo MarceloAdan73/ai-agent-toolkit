@@ -1,0 +1,44 @@
+{
+  "name": "agent-security-audit",
+  "version": "1.1.0",
+  "description": "AI-powered security audit tool that analyzes source code for vulnerabilities (OWASP Top 10)",
+  "main": "dist/index.js",
+  "bin": {
+    "agent-security-audit": "./dist/index.js"
+  },
+  "files": ["dist/", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "type": "module",
+  "license": "MIT",
+  "author": "Marcelo Adán",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx index.ts",
+    "audit": "node dist/index.js --path .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "test:integration": "vitest run tests/providerIntegration.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+  },
+  "keywords": ["ai", "security", "audit", "owasp", "vulnerability-scanning", "code-security"],
+  "dependencies": {
+    "@google/genai": "^1.52.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
+    "ora": "^9.4.1",
+    "pdfkit": "^0.19.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pdfkit": "^0.17.6",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.10"
+  }
+}

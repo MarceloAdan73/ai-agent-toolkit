@@ -1,0 +1,27 @@
+{
+  "name": "ai-toolkit",
+  "version": "1.0.0",
+  "description": "AI Agent Toolkit - CLI unificada para herramientas de desarrollo impulsadas por IA",
+  "type": "module",
+  "bin": {
+    "ai-toolkit": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "agent-doc-generator": "*",
+    "agent-test-generator": "*",
+    "agent-code-review": "*",
+    "agent-refactor": "*",
+    "agent-security-audit": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "author": "Marcelo Adán",
+  "license": "MIT"
+}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+*.log
+.security-cache.json
+.aicode.json
+SECURITY_AUDIT.md
