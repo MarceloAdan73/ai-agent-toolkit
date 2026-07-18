@@ -1,125 +1,126 @@
 <div align="center">
 
-# AI Agent Toolkit
+# AI AGENT TOOLKIT
 
-**Suite de agentes CLI impulsados por IA para automatizar el ciclo de desarrollo de software.**
+**Suite of 5 AI-powered CLI agents for automating software development workflows.**
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)
-![Tests](https://img.shields.io/badge/tests-596%20passing-brightgreen)
-![Agents](https://img.shields.io/badge/agents-5-active-brightgreen)
-![CI](https://img.shields.io/badge/CI-GitHub%20Actions-blue)
-![Providers](https://img.shields.io/badge/AI%20Providers-5-orange)
-![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
+[![CI](https://github.com/MarceloAdan73/ai-agent-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/MarceloAdan73/ai-agent-toolkit/actions)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit)
+[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=for-the-badge)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Tests](https://img.shields.io/badge/tests-596%20passing-brightgreen?style=for-the-badge)](https://vitest.dev)
+[![Agents](https://img.shields.io/badge/agents-5-active-brightgreen?style=for-the-badge)](#agents)
+[![Providers](https://img.shields.io/badge/AI%20Providers-5-orange?style=for-the-badge)](#supported-ai-providers)
+[![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit/pulls)
 
----
+[Installation](#installation) · [Agents](#agents) · [Providers](#supported-ai-providers) · [CLI Flags](#cli-flags) · [Contributing](#contributing)
 
 </div>
 
-## Que es
+---
 
-AI Agent Toolkit es un **monorepo** que agrupa 5 agentes de IA independientes, cada uno especializado en una tarea del desarrollo. Comparten un CLI unificado, stack común y soportan múltiples proveedores de IA.
+## Overview
+
+AI Agent Toolkit is a **monorepo** grouping 5 independent AI agents, each specialized in a different development task. They share a unified CLI, common stack, and support multiple AI providers.
 
 ```bash
-npx ai-toolkit doc       ./src   # documentacion automatica
-npx ai-toolkit test      ./src   # pruebas unitarias
+npx ai-toolkit doc       ./src   # automatic documentation
+npx ai-toolkit test      ./src   # unit tests
 npx ai-toolkit review    ./src   # code review
-npx ai-toolkit refactor  ./src   # refactorizacion
-npx ai-toolkit audit     ./src   # auditoria de seguridad
+npx ai-toolkit refactor  ./src   # refactoring
+npx ai-toolkit audit     ./src   # security audit
 ```
 
 ---
 
-## Agentes
+## Agents
 
-| Comando | Paquete | Version | Descripcion |
+| Command | Package | Version | Description |
 |:-------:|---------|:-------:|-------------|
-| `ai-toolkit doc` | [`agent-doc-generator`](./agent-doc-generator/) | v2.2.0 | Genera documentacion JSDoc automatica |
-| `ai-toolkit test` | [`agent-test-generator`](./agent-test-generator/) | v2.1.0 | Genera pruebas unitarias con Vitest |
-| `ai-toolkit review` | [`agent-code-review`](./agent-code-review/) | v1.1.0 | Analiza calidad y Complejidad ciclomatica |
-| `ai-toolkit refactor` | [`agent-refactor`](./agent-refactor/) | v1.1.0 | Sugiere y aplica refactorizaciones con diffs |
-| `ai-toolkit audit` | [`agent-security-audit`](./agent-security-audit/) | v1.1.0 | Auditoria de seguridad OWASP Top 10 |
+| `ai-toolkit doc` | [`agent-doc-generator`](./agent-doc-generator/) | v2.2.0 | Generates JSDoc documentation automatically |
+| `ai-toolkit test` | [`agent-test-generator`](./agent-test-generator/) | v2.1.0 | Generates unit tests with Vitest |
+| `ai-toolkit review` | [`agent-code-review`](./agent-code-review/) | v1.1.0 | Analyzes code quality and cyclomatic complexity |
+| `ai-toolkit refactor` | [`agent-refactor`](./agent-refactor/) | v1.1.0 | Suggests and applies refactorizations with diffs |
+| `ai-toolkit audit` | [`agent-security-audit`](./agent-security-audit/) | v1.1.0 | OWASP Top 10 security audit |
 
-> Cada agente es un paquete npm independiente. Instalalos por separado o usa el CLI unificado.
+> Each agent is an independent npm package. Install them separately or use the unified CLI.
 
 ---
 
-## Proveedores de IA
+## Supported AI Providers
 
-Soporta 5 proveedores con **auto-deteccion automatica**. Si no especificas `--provider`, el toolkit detecta que tienes configurado.
+Supports 5 providers with **automatic detection**. If you don't specify `--provider`, the toolkit detects what you have configured.
 
-| Provider | Modelo Default | Auth | Notas |
-|----------|---------------|------|-------|
-| **Gemini** | `gemini-2.5-flash` | `GEMINI_API_KEY` | Free tier disponible |
+| Provider | Default Model | Auth | Notes |
+|----------|--------------|------|-------|
+| **Gemini** | `gemini-2.5-flash` | `GEMINI_API_KEY` | Free tier available |
 | **OpenAI** | `gpt-4o` | `OPENAI_API_KEY` | GPT-4o, GPT-4o-mini |
-| **Anthropic** | `claude-sonnet-4-20250514` | `ANTHROPIC_API_KEY` | Mejor para coding |
-| **DeepSeek** | `deepseek-chat` | `DEEPSEEK_API_KEY` | Mas economico |
-| **Ollama** | modelo local | Sin key | Local, gratis, privacidad total |
+| **Anthropic** | `claude-sonnet-4-20250514` | `ANTHROPIC_API_KEY` | Best for coding |
+| **DeepSeek** | `deepseek-chat` | `DEEPSEEK_API_KEY` | Most affordable |
+| **Ollama** | local model | No key | Local, free, full privacy |
 
-**Prioridad de deteccion:** OpenAI > Anthropic > DeepSeek > Gemini > Ollama
+**Detection priority:** OpenAI > Anthropic > DeepSeek > Gemini > Ollama
 
 ```bash
-# Especificar provider explicitamente
+# Specify provider explicitly
 npx ai-toolkit doc --path ./src --provider openai
 npx ai-toolkit audit --path ./src --provider ollama --model qwen2.5-coder:7b
 ```
 
 ---
 
-## Quick Start
+## Installation
 
-### Desde npm (publicado)
+### From npm (published)
 
 ```bash
 npm install -g ai-toolkit
 npx ai-toolkit doc --path ./src
 ```
 
-### Desde el repositorio
+### From repository
 
 ```bash
 git clone https://github.com/MarceloAdan73/ai-agent-toolkit.git
 cd ai-agent-toolkit
 npm install && npm run build
 
-# Configurar un provider
+# Configure a provider
 cp .env.example .env
-# Editar .env con tu API key
+# Edit .env with your API key
 
-# Ejecutar
+# Run
 node toolkit/dist/cli.js doc --path ./src
 ```
 
 ---
 
-## Arquitectura
+## Architecture
 
 ```
 ai-agent-toolkit/
 ├── package.json                 # npm workspaces
-├── toolkit/                     # CLI unificado (ai-toolkit)
+├── toolkit/                     # Unified CLI (ai-toolkit)
 │   └── src/cli.ts
-├── agent-doc-generator/         # documentacion
-├── agent-test-generator/        # pruebas unitarias
+├── agent-doc-generator/         # documentation
+├── agent-test-generator/        # unit tests
 ├── agent-code-review/           # code review
-├── agent-refactor/              # refactorizacion
-└── agent-security-audit/        # auditoria OWASP
+├── agent-refactor/              # refactoring
+└── agent-security-audit/        # OWASP security audit
 ```
 
-Cada agente contiene: `src/` (logica), `tests/` (Vitest), `index.ts` (entry point), `package.json` (bin, files, engines).
+Each agent contains: `src/` (logic), `tests/` (Vitest), `index.ts` (entry point), `package.json` (bin, files, engines).
 
 ---
 
-## Stack
+## Tech Stack
 
-| Capa | Tecnologia |
-|------|------------|
-| Lenguaje | TypeScript (strict mode) |
+| Layer | Technology |
+|-------|------------|
+| Language | TypeScript (strict mode) |
 | Runtime | Node.js >= 18 (ES Modules) |
-| IA Providers | Gemini, OpenAI, Anthropic, DeepSeek, Ollama |
+| AI Providers | Gemini, OpenAI, Anthropic, DeepSeek, Ollama |
 | CLI | Commander.js |
 | Progress UI | ora |
 | Testing | Vitest (596 tests) |
@@ -130,72 +131,74 @@ Cada agente contiene: `src/` (logica), `tests/` (Vitest), `index.ts` (entry poin
 
 ## CLI Flags
 
-| Flag | Descripcion | Default |
+| Flag | Description | Default |
 |------|-------------|---------|
-| `--path` | Archivo o carpeta a procesar | *(requerido)* |
-| `--provider` | `gemini` \| `openai` \| `anthropic` \| `deepseek` \| `ollama` | auto-detectado |
-| `--model` | Modelo a usar | segun provider |
-| `--base-url` | URL del servidor (Ollama) | `http://localhost:11434` |
-| `--api-key` | API key (opcional para Ollama) | `.env` |
-| `--max-chars` | Limite de chars por archivo | `15000` |
-| `--output` | Carpeta/archivo de salida | junto al archivo |
-| `--extensions` | Extensiones a procesar (CSV) | todas |
-| `--split` | Un archivo por cada fuente | `false` |
+| `--path` | File or folder to process | *(required)* |
+| `--provider` | `gemini` \| `openai` \| `anthropic` \| `deepseek` \| `ollama` | auto-detected |
+| `--model` | Model to use | per provider |
+| `--base-url` | Server URL (Ollama) | `http://localhost:11434` |
+| `--api-key` | API key (optional for Ollama) | `.env` |
+| `--max-chars` | Character limit per file | `15000` |
+| `--output` | Output folder/file | next to source |
+| `--extensions` | Extensions to process (CSV) | all |
+| `--split` | One file per source | `false` |
 | `--format` | `terminal` \| `markdown` \| `html` \| `pdf` | `terminal` |
-| `--severity` | Severidad minima (audit) | `info` |
-| `--dry-run` | Solo preview, no escribir | `false` |
-| `--verbose` | Logs detallados | `false` |
+| `--severity` | Minimum severity (audit) | `info` |
+| `--dry-run` | Preview only, don't write | `false` |
+| `--verbose` | Detailed logs | `false` |
 
 ---
 
 ## Features
 
-- **Multi-provider** — 5 proveedores de IA con auto-deteccion
-- **Cache inteligente** — hash MD5, no regenera archivos sin cambios
-- **Resiliencia** — 3 reintentos con backoff ante errores de API
-- **Truncado seguro** — archivos grandes se recortan con aviso
-- **Filtro por extension** — `--extensions .ts,.prisma` para limitar scope
-- **Exportacion** — terminal, Markdown, HTML o PDF
-- **Dry-run** — preview antes de escribir cambios
-- **Modo split** — un archivo de salida por cada fuente analizada
+| Feature | Description |
+|---------|-------------|
+| **Multi-provider** | 5 AI providers with auto-detection |
+| **Smart cache** | MD5 hash, skips unchanged files |
+| **Resilience** | 3 retries with backoff on API errors |
+| **Safe truncation** | Large files trimmed with warning |
+| **Extension filter** | `--extensions .ts,.prisma` to limit scope |
+| **Export** | Terminal, Markdown, HTML or PDF |
+| **Dry-run** | Preview before writing changes |
+| **Split mode** | One output file per analyzed source |
 
 ---
 
 ## Scripts
 
 ```bash
-npm run build            # build de todos los packages
+npm run build            # build all packages
 npm run test             # 596 tests
-npm run typecheck        # typecheck estricto
-npm run test:integration # tests con providers reales (requiere API keys)
+npm run typecheck        # strict typecheck
+npm run test:integration # tests with real providers (requires API keys)
 ```
 
 ---
 
 ## Roadmap
 
-- [x] 5 agentes funcionales con 596 tests
-- [x] CLI unificado `ai-toolkit`
-- [x] Multi-provider + auto-deteccion
-- [x] Cache de respuestas
-- [x] Exportacion HTML/PDF
-- [x] CI/CD con GitHub Actions
-- [x] Preparado para publicacion npm
-- [ ] Publicar en npm
-- [ ] Tests de integracion con providers reales
-- [ ] Configuracion via archivos `.rc`
+- [x] 5 functional agents with 596 tests
+- [x] Unified CLI `ai-toolkit`
+- [x] Multi-provider + auto-detection
+- [x] Response caching
+- [x] HTML/PDF export
+- [x] CI/CD with GitHub Actions
+- [x] Ready for npm publishing
+- [ ] Publish to npm
+- [ ] Integration tests with real providers
+- [ ] Configuration via `.rc` files
 
 ---
 
 ## Contributing
 
-Las contributions son bienvenidas. Abre un issue o un PR.
+Contributions are welcome. Open an issue or a PR.
 
 ```bash
 git clone https://github.com/MarceloAdan73/ai-agent-toolkit.git
 cd ai-agent-toolkit
 npm install
-npm run test   # verifica que todo pase antes de PR
+npm run test   # make sure everything passes before PR
 ```
 
 ---
@@ -208,6 +211,6 @@ npm run test   # verifica que todo pase antes de PR
 
 <div align="center">
 
-**[GitHub](https://github.com/MarceloAdan73)** · **[Reportar Bug](https://github.com/MarceloAdan73/ai-agent-toolkit/issues)** · **[Request Feature](https://github.com/MarceloAdan73/ai-agent-toolkit/issues)**
+**[GitHub](https://github.com/MarceloAdan73)** · **[Report Bug](https://github.com/MarceloAdan73/ai-agent-toolkit/issues)** · **[Request Feature](https://github.com/MarceloAdan73/ai-agent-toolkit/issues)**
 
 </div>
