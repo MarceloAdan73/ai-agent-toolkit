@@ -773,6 +773,76 @@ FASE 12 Post-publicacion (verificar + documentar)
 
 ---
 
+---
+
+## ESTADO DE AVANCE
+
+**Ultima actualizacion:** 20/07/2026
+**Rama activa:** `dev`
+**Commit:** `7db2354` - "feat: prepare for npm publishing under @marcelo scope"
+
+### Fases completadas
+
+| Fase | Estado | Detalle |
+|------|--------|---------|
+| FASE 1 | COMPLETADA | Rama `dev` creada desde `main` |
+| FASE 2 | COMPLETADA | `toolkit/src/cli.ts` corregido (createRequire) |
+| FASE 3 | COMPLETADA | `toolkit/package.json` actualizado (campos + semver) |
+| FASE 4 | COMPLETADA | 5 agentes: nombre `@marcelo/`, version `1.0.0` |
+| FASE 5 | COMPLETADA | `package.json` raiz actualizado |
+| FASE 6 | COMPLETADA | LICENSE copiado a los 6 workspaces |
+| FASE 7 | COMPLETADA | `npm run build` OK, `npm run typecheck` OK, `npm test` 596/596 OK |
+| FASE 8 | COMPLETADA | `npm pack --dry-run` verificado en los 6 paquetes |
+| FASE 9 | COMPLETADA | Commit + push a `origin/dev` |
+| FASE 9.5 | COMPLETADA | Test local: toolkit resuelve agentes OK, detecta Ollama |
+
+### Fases pendientes
+
+| Fase | Estado | Que hacer |
+|------|--------|-----------|
+| FASE 10 | PENDIENTE | Merge `dev` -> `main` + push |
+| FASE 11 | PENDIENTE | `npm login` + publicar 6 paquetes |
+| FASE 12 | PENDIENTE | Verificar en npmjs.com + tag + badges |
+
+### Resumen de cambios aplicados
+
+**Archivos modificados:**
+- `toolkit/src/cli.ts` - createRequire + nombres `@marcelo/`
+- `toolkit/package.json` - namespace, campos, semver
+- `agent-doc-generator/package.json` - namespace, version, repository
+- `agent-test-generator/package.json` - namespace, version, repository
+- `agent-code-review/package.json` - namespace, version, repository
+- `agent-refactor/package.json` - namespace, version, repository
+- `agent-security-audit/package.json` - namespace, version, repository
+- `package.json` (raiz) - nombre actualizado
+
+**Archivos creados:**
+- `NPM_PUBLISH_PLAN.md` (este archivo)
+- `toolkit/LICENSE`
+- `agent-doc-generator/LICENSE`
+- `agent-test-generator/LICENSE`
+- `agent-code-review/LICENSE`
+- `agent-refactor/LICENSE`
+- `agent-security-audit/LICENSE`
+
+### Resultados de verificacion
+
+| Check | Resultado |
+|-------|-----------|
+| Build | 6/6 workspaces OK |
+| Typecheck | 6/6 workspaces OK |
+| Tests | 596/596 tests passing (50 test files) |
+| Dry-run pack agent-doc-generator | 24.3 kB, 47 archivos |
+| Dry-run pack agent-test-generator | 24.3 kB, 47 archivos |
+| Dry-run pack agent-code-review | 25.7 kB, 47 archivos |
+| Dry-run pack agent-refactor | 26.7 kB, 47 archivos |
+| Dry-run pack agent-security-audit | 26.5 kB, 47 archivos |
+| Dry-run pack toolkit | 2.6 kB, 4 archivos |
+| Toolkit --help | OK |
+| Toolkit resuelve agentes | OK (probado con `doc --path`) |
+
+---
+
 *Archivo generado el 20/07/2026 por OpenCode.*
 *Proyecto: ai-agent-toolkit*
-*Estado: LISTO PARA EJECUTAR*
+*Estado: FASES 1-9.5 COMPLETADAS - LISTO PARA MERGE Y PUBLICACION*
