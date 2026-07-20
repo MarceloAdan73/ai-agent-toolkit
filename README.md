@@ -14,6 +14,13 @@
 [![Providers](https://img.shields.io/badge/AI%20Providers-5-orange?style=for-the-badge)](#-supported-ai-providers)
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit/pulls)
 
+[![npm toolkit](https://img.shields.io/npm/v/@npm7381/ai-agent-toolkit?style=flat-square&label=ai-agent-toolkit)](https://www.npmjs.com/package/@npm7381/ai-agent-toolkit)
+[![npm doc-generator](https://img.shields.io/npm/v/@npm7381/agent-doc-generator?style=flat-square&label=doc-generator)](https://www.npmjs.com/package/@npm7381/agent-doc-generator)
+[![npm test-generator](https://img.shields.io/npm/v/@npm7381/agent-test-generator?style=flat-square&label=test-generator)](https://www.npmjs.com/package/@npm7381/agent-test-generator)
+[![npm code-review](https://img.shields.io/npm/v/@npm7381/agent-code-review?style=flat-square&label=code-review)](https://www.npmjs.com/package/@npm7381/agent-code-review)
+[![npm refactor](https://img.shields.io/npm/v/@npm7381/agent-refactor?style=flat-square&label=refactor)](https://www.npmjs.com/package/@npm7381/agent-refactor)
+[![npm security-audit](https://img.shields.io/npm/v/@npm7381/agent-security-audit?style=flat-square&label=security-audit)](https://www.npmjs.com/package/@npm7381/agent-security-audit)
+
 [📦 Installation](#-installation) · [🤖 Agents](#-agents) · [🧠 Providers](#-supported-ai-providers) · [⚙️ CLI Flags](#%EF%B8%8F-cli-flags) · [🤝 Contributing](#-contributing)
 
 </div>
@@ -38,11 +45,11 @@ npx ai-toolkit audit     ./src   # 🛡️ security audit
 
 | Command | Package | Version | Description |
 |:-------:|---------|:-------:|-------------|
-| `ai-toolkit doc` | [`agent-doc-generator`](./agent-doc-generator/) | v2.2.0 | 📄 Generates JSDoc documentation automatically |
-| `ai-toolkit test` | [`agent-test-generator`](./agent-test-generator/) | v2.1.0 | 🧪 Generates unit tests with Vitest |
-| `ai-toolkit review` | [`agent-code-review`](./agent-code-review/) | v1.1.0 | 🔍 Analyzes code quality and cyclomatic complexity |
-| `ai-toolkit refactor` | [`agent-refactor`](./agent-refactor/) | v1.1.0 | ♻️ Suggests and applies refactorizations with diffs |
-| `ai-toolkit audit` | [`agent-security-audit`](./agent-security-audit/) | v1.1.0 | 🛡️ OWASP Top 10 security audit |
+| `ai-toolkit doc` | [`@npm7381/agent-doc-generator`](https://www.npmjs.com/package/@npm7381/agent-doc-generator) | v1.0.0 | 📄 Generates JSDoc documentation automatically |
+| `ai-toolkit test` | [`@npm7381/agent-test-generator`](https://www.npmjs.com/package/@npm7381/agent-test-generator) | v1.0.0 | 🧪 Generates unit tests with Vitest |
+| `ai-toolkit review` | [`@npm7381/agent-code-review`](https://www.npmjs.com/package/@npm7381/agent-code-review) | v1.0.0 | 🔍 Analyzes code quality and cyclomatic complexity |
+| `ai-toolkit refactor` | [`@npm7381/agent-refactor`](https://www.npmjs.com/package/@npm7381/agent-refactor) | v1.0.0 | ♻️ Suggests and applies refactorizations with diffs |
+| `ai-toolkit audit` | [`@npm7381/agent-security-audit`](https://www.npmjs.com/package/@npm7381/agent-security-audit) | v1.0.0 | 🛡️ OWASP Top 10 security audit |
 
 > 💡 Each agent is an independent npm package. Install them separately or use the unified CLI.
 
@@ -75,8 +82,15 @@ npx ai-toolkit audit --path ./src --provider ollama --model qwen2.5-coder:7b
 ### 🚀 From npm (published)
 
 ```bash
-npm install -g ai-toolkit
+npm install -g @npm7381/ai-agent-toolkit
 npx ai-toolkit doc --path ./src
+```
+
+Or install agents individually:
+
+```bash
+npx @npm7381/agent-doc-generator --path ./src
+npx @npm7381/agent-test-generator --path ./src
 ```
 
 ### 📥 From repository
@@ -184,7 +198,7 @@ npm run test:integration # 🔗 tests with real providers (requires API keys)
 - [x] ✅ HTML/PDF export
 - [x] ✅ CI/CD with GitHub Actions
 - [x] ✅ Ready for npm publishing
-- [ ] ⏳ Publish to npm
+- [x] ✅ Publish to npm
 - [ ] ⏳ Integration tests with real providers
 - [ ] ⏳ Configuration via `.rc` files
 
