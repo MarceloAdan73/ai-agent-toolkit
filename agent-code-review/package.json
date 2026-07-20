@@ -1,5 +1,5 @@
 {
-  "name": "@npm7381/agent-code-review",
+  "name": "@aiagentkit/agent-code-review",
   "version": "1.0.0",
   "description": "AI-powered code review tool that analyzes code quality and suggests improvements",
   "main": "dist/index.js",

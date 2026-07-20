@@ -1,5 +1,5 @@
 {
-  "name": "@npm7381/ai-agent-toolkit-monorepo",
+  "name": "@aiagentkit/ai-agent-toolkit-monorepo",
   "version": "1.0.0",
   "description": "Monorepo de agentes de IA para automatizar tareas de desarrollo",
   "private": true,

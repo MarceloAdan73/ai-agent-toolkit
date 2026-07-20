@@ -6,10 +6,10 @@ Sugiere y aplica refactorizaciones de código usando IA.
 
 ```bash
 # Global
-npm install -g @npm7381/agent-refactor
+npm install -g @aiagentkit/agent-refactor
 
 # O sin instalar
-npx @npm7381/agent-refactor --path ./src
+npx @aiagentkit/agent-refactor --path ./src
 ```
 
 ## Uso

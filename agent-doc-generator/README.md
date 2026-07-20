@@ -6,10 +6,10 @@ Genera documentación JSDoc automática usando IA.
 
 ```bash
 # Global
-npm install -g @npm7381/agent-doc-generator
+npm install -g @aiagentkit/agent-doc-generator
 
 # O sin instalar
-npx @npm7381/agent-doc-generator --path ./src
+npx @aiagentkit/agent-doc-generator --path ./src
 ```
 
 ## Uso

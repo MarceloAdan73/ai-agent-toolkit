@@ -1,5 +1,5 @@
 {
-  "name": "@npm7381/agent-refactor",
+  "name": "@aiagentkit/agent-refactor",
   "version": "1.0.0",
   "description": "AI-powered refactoring tool that suggests and applies code refactorizations",
   "main": "dist/index.js",
