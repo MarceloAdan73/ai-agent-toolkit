@@ -6,10 +6,10 @@ Analiza calidad del código y sugiere mejoras usando IA.
 
 ```bash
 # Global
-npm install -g agent-code-review
+npm install -g @npm7381/agent-code-review
 
 # O sin instalar
-npx agent-code-review --path ./src
+npx @npm7381/agent-code-review --path ./src
 ```
 
 ## Uso

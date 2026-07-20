@@ -6,10 +6,10 @@ Audita seguridad del código contra OWASP Top 10 usando IA.
 
 ```bash
 # Global
-npm install -g agent-security-audit
+npm install -g @npm7381/agent-security-audit
 
 # O sin instalar
-npx agent-security-audit --path ./src
+npx @npm7381/agent-security-audit --path ./src
 ```
 
 ## Uso

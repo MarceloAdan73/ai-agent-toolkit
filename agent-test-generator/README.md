@@ -6,10 +6,10 @@ Genera pruebas unitarias (Vitest) automáticas usando IA.
 
 ```bash
 # Global
-npm install -g agent-test-generator
+npm install -g @npm7381/agent-test-generator
 
 # O sin instalar
-npx agent-test-generator --path ./src
+npx @npm7381/agent-test-generator --path ./src
 ```
 
 ## Uso
