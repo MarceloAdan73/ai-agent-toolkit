@@ -28,6 +28,8 @@ npm-debug.log*
 .aicode.json
 PROXIMA_SESION.txt
 AI_AGENT_TOOLKIT_CONTEXT.md
+NPM_PUBLISH_PLAN.md
+.mailmap
 
 # Cache files (per-agent)
 .doc-cache.json
