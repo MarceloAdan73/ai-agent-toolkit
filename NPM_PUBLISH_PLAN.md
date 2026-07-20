@@ -1,7 +1,7 @@
 # NPM PUBLISH PLAN - ai-agent-toolkit
 
 **Fecha:** 20/07/2026
-**Objetivo:** Publicar 6 paquetes en npm bajo el scope `@marcelo/`
+**Objetivo:** Publicar 6 paquetes en npm bajo el scope `@npm7381/`
 **Autor:** Marcelo Adan
 
 ---
@@ -10,7 +10,7 @@
 
 | Decision | Valor |
 |----------|-------|
-| Namespace | `@marcelo/` |
+| Namespace | `@npm7381/` |
 | Version inicial | `1.0.0` (todos los paquetes) |
 | Paquetes a publicar | 6 (5 agentes + 1 toolkit unificado) |
 | Rama de trabajo | `dev` (crear desde `main`) |
@@ -21,12 +21,12 @@
 
 | Paquete npm | Directorio | Descripcion |
 |-------------|-----------|-------------|
-| `@marcelo/agent-doc-generator` | `agent-doc-generator/` | Generador de documentacion con IA |
-| `@marcelo/agent-test-generator` | `agent-test-generator/` | Generador de tests unitarios con IA |
-| `@marcelo/agent-code-review` | `agent-code-review/` | Revision de codigo con IA |
-| `@marcelo/agent-refactor` | `agent-refactor/` | Herramienta de refactorizacion con IA |
-| `@marcelo/agent-security-audit` | `agent-security-audit/` | Auditoria de seguridad OWASP con IA |
-| `@marcelo/ai-agent-toolkit` | `toolkit/` | CLI unificada que engloba los 5 agentes |
+| `@npm7381/agent-doc-generator` | `agent-doc-generator/` | Generador de documentacion con IA |
+| `@npm7381/agent-test-generator` | `agent-test-generator/` | Generador de tests unitarios con IA |
+| `@npm7381/agent-code-review` | `agent-code-review/` | Revision de codigo con IA |
+| `@npm7381/agent-refactor` | `agent-refactor/` | Herramienta de refactorizacion con IA |
+| `@npm7381/agent-security-audit` | `agent-security-audit/` | Auditoria de seguridad OWASP con IA |
+| `@npm7381/ai-agent-toolkit` | `toolkit/` | CLI unificada que engloba los 5 agentes |
 
 ---
 
@@ -105,7 +105,7 @@ const agentEntry = require.resolve(`${agentName}/dist/index.js`);
 
 ```json
 {
-  "name": "@marcelo/ai-agent-toolkit",
+  "name": "@npm7381/ai-agent-toolkit",
   "version": "1.0.0",
   "description": "AI Agent Toolkit - CLI unificada para herramientas de desarrollo impulsadas por IA",
   "type": "module",
@@ -121,11 +121,11 @@ const agentEntry = require.resolve(`${agentName}/dist/index.js`);
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@marcelo/agent-doc-generator": "^1.0.0",
-    "@marcelo/agent-test-generator": "^1.0.0",
-    "@marcelo/agent-code-review": "^1.0.0",
-    "@marcelo/agent-refactor": "^1.0.0",
-    "@marcelo/agent-security-audit": "^1.0.0"
+    "@npm7381/agent-doc-generator": "^1.0.0",
+    "@npm7381/agent-test-generator": "^1.0.0",
+    "@npm7381/agent-code-review": "^1.0.0",
+    "@npm7381/agent-refactor": "^1.0.0",
+    "@npm7381/agent-security-audit": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -147,10 +147,10 @@ const agentEntry = require.resolve(`${agentName}/dist/index.js`);
 
 | Campo | Antes | Despues | Por que |
 |-------|-------|---------|---------|
-| `name` | `ai-toolkit` | `@marcelo/ai-agent-toolkit` | Namespace unico |
+| `name` | `ai-toolkit` | `@npm7381/ai-agent-toolkit` | Namespace unico |
 | `files` | (no existia) | `["dist/", "README.md", "LICENSE"]` | Solo publicar lo necesario |
 | `engines` | (no existia) | `{ "node": ">=18" }` | Requisito minimo |
-| `dependencies` | `"agent-doc-generator": "*"` | `"@marcelo/agent-doc-generator": "^1.0.0"` | Versiones reales |
+| `dependencies` | `"agent-doc-generator": "*"` | `"@npm7381/agent-doc-generator": "^1.0.0"` | Versiones reales |
 | `prepublishOnly` | (no existia) | `"npm run build"` | Build automatico antes de publicar |
 | `repository` | (no existia) | Con `directory` | Link al repo correcto |
 | `keywords` | (no existia) | Array de keywords | Discoverability en npm |
@@ -159,14 +159,14 @@ const agentEntry = require.resolve(`${agentName}/dist/index.js`);
 
 ## FASE 4: Cambiar nombres en los 5 agentes
 
-Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
+Cada agente necesita: nombre `@npm7381/`, version `1.0.0`, y campos faltantes.
 
 ### 4.1 agent-doc-generator/package.json
 
 **Contenido completo nuevo:**
 ```json
 {
-  "name": "@marcelo/agent-doc-generator",
+  "name": "@npm7381/agent-doc-generator",
   "version": "1.0.0",
   "description": "AI-powered documentation generator for codebases",
   "main": "dist/index.js",
@@ -217,7 +217,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 **Contenido completo nuevo:**
 ```json
 {
-  "name": "@marcelo/agent-test-generator",
+  "name": "@npm7381/agent-test-generator",
   "version": "1.0.0",
   "description": "AI-powered unit test generator using Vitest",
   "main": "dist/index.js",
@@ -267,7 +267,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 **Contenido completo nuevo:**
 ```json
 {
-  "name": "@marcelo/agent-code-review",
+  "name": "@npm7381/agent-code-review",
   "version": "1.0.0",
   "description": "AI-powered code review tool that analyzes code quality and suggests improvements",
   "main": "dist/index.js",
@@ -318,7 +318,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 **Contenido completo nuevo:**
 ```json
 {
-  "name": "@marcelo/agent-refactor",
+  "name": "@npm7381/agent-refactor",
   "version": "1.0.0",
   "description": "AI-powered refactoring tool that suggests and applies code refactorizations",
   "main": "dist/index.js",
@@ -369,7 +369,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 **Contenido completo nuevo:**
 ```json
 {
-  "name": "@marcelo/agent-security-audit",
+  "name": "@npm7381/agent-security-audit",
   "version": "1.0.0",
   "description": "AI-powered security audit tool that analyzes source code for vulnerabilities (OWASP Top 10)",
   "main": "dist/index.js",
@@ -419,11 +419,11 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 
 | Agente | Campo `name` | Campo `version` | Campo `repository.directory` |
 |--------|-------------|----------------|------------------------------|
-| agent-doc-generator | `@marcelo/agent-doc-generator` | `1.0.0` | `"directory": "agent-doc-generator"` |
-| agent-test-generator | `@marcelo/agent-test-generator` | `1.0.0` | `"directory": "agent-test-generator"` |
-| agent-code-review | `@marcelo/agent-code-review` | `1.0.0` | `"directory": "agent-code-review"` |
-| agent-refactor | `@marcelo/agent-refactor` | `1.0.0` | `"directory": "agent-refactor"` |
-| agent-security-audit | `@marcelo/agent-security-audit` | `1.0.0` | `"directory": "agent-security-audit"` |
+| agent-doc-generator | `@npm7381/agent-doc-generator` | `1.0.0` | `"directory": "agent-doc-generator"` |
+| agent-test-generator | `@npm7381/agent-test-generator` | `1.0.0` | `"directory": "agent-test-generator"` |
+| agent-code-review | `@npm7381/agent-code-review` | `1.0.0` | `"directory": "agent-code-review"` |
+| agent-refactor | `@npm7381/agent-refactor` | `1.0.0` | `"directory": "agent-refactor"` |
+| agent-security-audit | `@npm7381/agent-security-audit` | `1.0.0` | `"directory": "agent-security-audit"` |
 
 ---
 
@@ -435,7 +435,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 
 ```json
 {
-  "name": "@marcelo/ai-agent-toolkit-monorepo",
+  "name": "@npm7381/ai-agent-toolkit-monorepo",
   "version": "1.0.0",
   "description": "Monorepo de agentes de IA para automatizar tareas de desarrollo",
   "private": true,
@@ -471,7 +471,7 @@ Cada agente necesita: nombre `@marcelo/`, version `1.0.0`, y campos faltantes.
 
 ### Cambios
 
-- `name`: `"ai-agent-toolkit"` -> `"@marcelo/ai-agent-toolkit-monorepo"` (no se publica, es privado, pero actualizado por consistencia)
+- `name`: `"ai-agent-toolkit"` -> `"@npm7381/ai-agent-toolkit-monorepo"` (no se publica, es privado, pero actualizado por consistencia)
 
 ---
 
@@ -524,7 +524,7 @@ npm pack --dry-run -w toolkit
 
 ### Que verificar en cada output
 
-- [ ] El nombre del paquete empieza con `@marcelo/`
+- [ ] El nombre del paquete empieza con `@npm7381/`
 - [ ] La version es `1.0.0`
 - [ ] Incluye `dist/` (archivos compilados)
 - [ ] Incluye `README.md`
@@ -546,9 +546,9 @@ git status
 git add .
 
 # Commit
-git commit -m "feat: prepare for npm publishing under @marcelo scope
+git commit -m "feat: prepare for npm publishing under @npm7381 scope
 
-- Add @marcelo/ namespace to all 6 packages
+- Add @npm7381/ namespace to all 6 packages
 - Fix toolkit agent resolution (createRequire instead of hardcoded path)
 - Set all versions to 1.0.0
 - Add missing fields: files, engines, repository, keywords, prepublishOnly
@@ -595,7 +595,7 @@ npm whoami
 ```bash
 # Esto fallara si el scope ya esta registrado por otro usuario
 # Si falla, usar un nombre alternativo
-npm init --scope=marcelo --dry-run
+npm init --scope=npm7381 --dry-run
 ```
 
 ### Paso 3: Publicar agentes (en orden)
@@ -618,7 +618,7 @@ npm publish -w toolkit --access public
 
 ### Nota sobre `--access public`
 
-Los paquetes con scope (`@marcelo/`) son **privados por defecto** en npm. El flag `--access public` los hace visibles publicamente. Sin este flag, la publicacion fallara con un error de permisos.
+Los paquetes con scope (`@npm7381/`) son **privados por defecto** en npm. El flag `--access public` los hace visibles publicamente. Sin este flag, la publicacion fallara con un error de permisos.
 
 ---
 
@@ -628,7 +628,7 @@ Los paquetes con scope (`@marcelo/`) son **privados por defecto** en npm. El fla
 
 ```bash
 # Instalar el toolkit globalmente
-npm install -g @marcelo/ai-agent-toolkit
+npm install -g @npm7381/ai-agent-toolkit
 
 # Verificar que funciona
 ai-toolkit --help
@@ -639,22 +639,22 @@ ai-toolkit --version
 
 ```bash
 # Probar cada agente sin instalar globalmente
-npx @marcelo/agent-doc-generator --help
-npx @marcelo/agent-test-generator --help
-npx @marcelo/agent-code-review --help
-npx @marcelo/agent-refactor --help
-npx @marcelo/agent-security-audit --help
+npx @npm7381/agent-doc-generator --help
+npx @npm7381/agent-test-generator --help
+npx @npm7381/agent-code-review --help
+npx @npm7381/agent-refactor --help
+npx @npm7381/agent-security-audit --help
 ```
 
 ### Verificar en npmjs.com
 
 Abrir en navegador:
-- https://www.npmjs.com/package/@marcelo/agent-doc-generator
-- https://www.npmjs.com/package/@marcelo/agent-test-generator
-- https://www.npmjs.com/package/@marcelo/agent-code-review
-- https://www.npmjs.com/package/@marcelo/agent-refactor
-- https://www.npmjs.com/package/@marcelo/agent-security-audit
-- https://www.npmjs.com/package/@marcelo/ai-agent-toolkit
+- https://www.npmjs.com/package/@npm7381/agent-doc-generator
+- https://www.npmjs.com/package/@npm7381/agent-test-generator
+- https://www.npmjs.com/package/@npm7381/agent-code-review
+- https://www.npmjs.com/package/@npm7381/agent-refactor
+- https://www.npmjs.com/package/@npm7381/agent-security-audit
+- https://www.npmjs.com/package/@npm7381/ai-agent-toolkit
 
 ### Tag de Git
 
@@ -668,12 +668,12 @@ git push origin v1.0.0
 Agregar badges de npm en `README.md` raiz:
 
 ```markdown
-[![npm](https://img.shields.io/npm/v/@marcelo/ai-agent-toolkit?style=flat-square&label=ai-agent-toolkit)](https://www.npmjs.com/package/@marcelo/ai-agent-toolkit)
-[![npm](https://img.shields.io/npm/v/@marcelo/agent-doc-generator?style=flat-square&label=doc-generator)](https://www.npmjs.com/package/@marcelo/agent-doc-generator)
-[![npm](https://img.shields.io/npm/v/@marcelo/agent-test-generator?style=flat-square&label=test-generator)](https://www.npmjs.com/package/@marcelo/agent-test-generator)
-[![npm](https://img.shields.io/npm/v/@marcelo/agent-code-review?style=flat-square&label=code-review)](https://www.npmjs.com/package/@marcelo/agent-code-review)
-[![npm](https://img.shields.io/npm/v/@marcelo/agent-refactor?style=flat-square&label=refactor)](https://www.npmjs.com/package/@marcelo/agent-refactor)
-[![npm](https://img.shields.io/npm/v/@marcelo/agent-security-audit?style=flat-square&label=security-audit)](https://www.npmjs.com/package/@marcelo/agent-security-audit)
+[![npm](https://img.shields.io/npm/v/@npm7381/ai-agent-toolkit?style=flat-square&label=ai-agent-toolkit)](https://www.npmjs.com/package/@npm7381/ai-agent-toolkit)
+[![npm](https://img.shields.io/npm/v/@npm7381/agent-doc-generator?style=flat-square&label=doc-generator)](https://www.npmjs.com/package/@npm7381/agent-doc-generator)
+[![npm](https://img.shields.io/npm/v/@npm7381/agent-test-generator?style=flat-square&label=test-generator)](https://www.npmjs.com/package/@npm7381/agent-test-generator)
+[![npm](https://img.shields.io/npm/v/@npm7381/agent-code-review?style=flat-square&label=code-review)](https://www.npmjs.com/package/@npm7381/agent-code-review)
+[![npm](https://img.shields.io/npm/v/@npm7381/agent-refactor?style=flat-square&label=refactor)](https://www.npmjs.com/package/@npm7381/agent-refactor)
+[![npm](https://img.shields.io/npm/v/@npm7381/agent-security-audit?style=flat-square&label=security-audit)](https://www.npmjs.com/package/@npm7381/agent-security-audit)
 ```
 
 ---
@@ -689,7 +689,7 @@ Antes de publicar, confirmar cada item:
 - [ ] `toolkit/src/cli.ts` usa `createRequire` (no path hardcodeado)
 
 ### package.json
-- [ ] Todos los `name` empiezan con `@marcelo/`
+- [ ] Todos los `name` empiezan con `@npm7381/`
 - [ ] Todos los `version` son `1.0.0`
 - [ ] Todos tienen `files`, `engines`, `repository`, `keywords`
 - [ ] Todos tienen `prepublishOnly: "npm run build"`
@@ -730,9 +730,9 @@ npm publish -w agent-security-audit --access public
 npm publish -w toolkit --access public
 
 # === VERIFICACION ===
-npm install -g @marcelo/ai-agent-toolkit
+npm install -g @npm7381/ai-agent-toolkit
 ai-toolkit --help
-npx @marcelo/agent-doc-generator --help
+npx @npm7381/agent-doc-generator --help
 
 # === GIT ===
 git add . && git commit -m "mensaje"
@@ -788,7 +788,7 @@ FASE 12 Post-publicacion (verificar + documentar)
 | FASE 1 | COMPLETADA | Rama `dev` creada desde `main` |
 | FASE 2 | COMPLETADA | `toolkit/src/cli.ts` corregido (createRequire) |
 | FASE 3 | COMPLETADA | `toolkit/package.json` actualizado (campos + semver) |
-| FASE 4 | COMPLETADA | 5 agentes: nombre `@marcelo/`, version `1.0.0` |
+| FASE 4 | COMPLETADA | 5 agentes: nombre `@npm7381/`, version `1.0.0` |
 | FASE 5 | COMPLETADA | `package.json` raiz actualizado |
 | FASE 6 | COMPLETADA | LICENSE copiado a los 6 workspaces |
 | FASE 7 | COMPLETADA | `npm run build` OK, `npm run typecheck` OK, `npm test` 596/596 OK |
