@@ -1,27 +1,37 @@
 {
-  "name": "ai-toolkit",
+  "name": "@marcelo/ai-agent-toolkit",
   "version": "1.0.0",
   "description": "AI Agent Toolkit - CLI unificada para herramientas de desarrollo impulsadas por IA",
   "type": "module",
   "bin": {
     "ai-toolkit": "./dist/cli.js"
   },
+  "files": ["dist/", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "agent-doc-generator": "*",
-    "agent-test-generator": "*",
-    "agent-code-review": "*",
-    "agent-refactor": "*",
-    "agent-security-audit": "*"
+    "@marcelo/agent-doc-generator": "^1.0.0",
+    "@marcelo/agent-test-generator": "^1.0.0",
+    "@marcelo/agent-code-review": "^1.0.0",
+    "@marcelo/agent-refactor": "^1.0.0",
+    "@marcelo/agent-security-audit": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
     "typescript": "^5.7.0"
   },
-  "author": "Marcelo Adán",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit",
+    "directory": "toolkit"
+  },
+  "keywords": ["ai", "cli", "toolkit", "agents", "code-generation", "documentation", "testing", "code-review", "security"],
+  "author": "Marcelo Adan",
+  "license": "MIT",
+  "homepage": "https://github.com/MarceloAdan73/ai-agent-toolkit"
 }

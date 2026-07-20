@@ -1,5 +1,5 @@
 {
-  "name": "ai-agent-toolkit",
+  "name": "@marcelo/ai-agent-toolkit-monorepo",
   "version": "1.0.0",
   "description": "Monorepo de agentes de IA para automatizar tareas de desarrollo",
   "private": true,
@@ -23,7 +23,7 @@
     "refactor": "node toolkit/dist/cli.js refactor --path .",
     "audit": "node toolkit/dist/cli.js audit --path ."
   },
-  "author": "Marcelo Adán",
+  "author": "Marcelo Adan",
   "license": "MIT",
   "repository": {
     "type": "git",

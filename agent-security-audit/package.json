@@ -1,6 +1,6 @@
 {
-  "name": "agent-security-audit",
-  "version": "1.1.0",
+  "name": "@marcelo/agent-security-audit",
+  "version": "1.0.0",
   "description": "AI-powered security audit tool that analyzes source code for vulnerabilities (OWASP Top 10)",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "engines": { "node": ">=18" },
   "type": "module",
   "license": "MIT",
-  "author": "Marcelo Adán",
+  "author": "Marcelo Adan",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -24,7 +24,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit",
+    "directory": "agent-security-audit"
   },
   "keywords": ["ai", "security", "audit", "owasp", "vulnerability-scanning", "code-security"],
   "dependencies": {

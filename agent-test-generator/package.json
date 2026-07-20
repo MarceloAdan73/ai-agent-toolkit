@@ -1,6 +1,6 @@
 {
-  "name": "agent-test-generator",
-  "version": "2.1.0",
+  "name": "@marcelo/agent-test-generator",
+  "version": "1.0.0",
   "description": "AI-powered unit test generator using Vitest",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "engines": { "node": ">=18" },
   "type": "module",
   "license": "MIT",
-  "author": "Marcelo Adán",
+  "author": "Marcelo Adan",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -23,7 +23,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit",
+    "directory": "agent-test-generator"
   },
   "keywords": ["ai", "testing", "unit-tests", "vitest", "test-generation", "code-generation"],
   "dependencies": {

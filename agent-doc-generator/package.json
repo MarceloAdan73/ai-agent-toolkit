@@ -1,6 +1,6 @@
 {
-  "name": "agent-doc-generator",
-  "version": "2.2.0",
+  "name": "@marcelo/agent-doc-generator",
+  "version": "1.0.0",
   "description": "AI-powered documentation generator for codebases",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "engines": { "node": ">=18" },
   "type": "module",
   "license": "MIT",
-  "author": "Marcelo Adán",
+  "author": "Marcelo Adan",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
@@ -24,7 +24,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit"
+    "url": "https://github.com/MarceloAdan73/ai-agent-toolkit",
+    "directory": "agent-doc-generator"
   },
   "keywords": ["ai", "documentation", "jsdoc", "code-generation", "documentation-generator"],
   "dependencies": {

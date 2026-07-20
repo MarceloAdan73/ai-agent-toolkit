@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 
 import { spawn } from 'child_process';
-import { resolve, dirname } from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 
 const AGENTS: Record<string, string> = {
-  doc: 'agent-doc-generator',
-  review: 'agent-code-review',
-  test: 'agent-test-generator',
-  refactor: 'agent-refactor',
-  audit: 'agent-security-audit',
+  doc: '@marcelo/agent-doc-generator',
+  review: '@marcelo/agent-code-review',
+  test: '@marcelo/agent-test-generator',
+  refactor: '@marcelo/agent-refactor',
+  audit: '@marcelo/agent-security-audit',
 };
 
 const VERSION = '1.0.0';
@@ -64,7 +66,7 @@ if (!agentName) {
   process.exit(1);
 }
 
-const agentEntry = resolve(__dirname, '..', '..', 'node_modules', agentName, 'dist', 'index.js');
+const agentEntry = require.resolve(`${agentName}/dist/index.js`);
 const childArgs = process.argv.slice(3);
 
 const child = spawn(process.execPath, [agentEntry, ...childArgs], { stdio: 'inherit' });
