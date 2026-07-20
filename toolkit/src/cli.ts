@@ -9,11 +9,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
 const AGENTS: Record<string, string> = {
-  doc: '@marcelo/agent-doc-generator',
-  review: '@marcelo/agent-code-review',
-  test: '@marcelo/agent-test-generator',
-  refactor: '@marcelo/agent-refactor',
-  audit: '@marcelo/agent-security-audit',
+  doc: '@npm7381/agent-doc-generator',
+  review: '@npm7381/agent-code-review',
+  test: '@npm7381/agent-test-generator',
+  refactor: '@npm7381/agent-refactor',
+  audit: '@npm7381/agent-security-audit',
 };
 
 const VERSION = '1.0.0';

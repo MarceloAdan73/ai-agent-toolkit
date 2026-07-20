@@ -1,5 +1,5 @@
 {
-  "name": "@marcelo/agent-refactor",
+  "name": "@npm7381/agent-refactor",
   "version": "1.0.0",
   "description": "AI-powered refactoring tool that suggests and applies code refactorizations",
   "main": "dist/index.js",

@@ -1,5 +1,5 @@
 {
-  "name": "@marcelo/agent-doc-generator",
+  "name": "@npm7381/agent-doc-generator",
   "version": "1.0.0",
   "description": "AI-powered documentation generator for codebases",
   "main": "dist/index.js",

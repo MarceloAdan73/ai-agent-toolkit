@@ -1,5 +1,5 @@
 {
-  "name": "@marcelo/agent-test-generator",
+  "name": "@npm7381/agent-test-generator",
   "version": "1.0.0",
   "description": "AI-powered unit test generator using Vitest",
   "main": "dist/index.js",

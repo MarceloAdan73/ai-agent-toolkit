@@ -1,5 +1,5 @@
 {
-  "name": "@marcelo/ai-agent-toolkit",
+  "name": "@npm7381/ai-agent-toolkit",
   "version": "1.0.0",
   "description": "AI Agent Toolkit - CLI unificada para herramientas de desarrollo impulsadas por IA",
   "type": "module",
@@ -15,11 +15,11 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@marcelo/agent-doc-generator": "^1.0.0",
-    "@marcelo/agent-test-generator": "^1.0.0",
-    "@marcelo/agent-code-review": "^1.0.0",
-    "@marcelo/agent-refactor": "^1.0.0",
-    "@marcelo/agent-security-audit": "^1.0.0"
+    "@npm7381/agent-doc-generator": "^1.0.0",
+    "@npm7381/agent-test-generator": "^1.0.0",
+    "@npm7381/agent-code-review": "^1.0.0",
+    "@npm7381/agent-refactor": "^1.0.0",
+    "@npm7381/agent-security-audit": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

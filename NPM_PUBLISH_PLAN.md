@@ -778,8 +778,8 @@ FASE 12 Post-publicacion (verificar + documentar)
 ## ESTADO DE AVANCE
 
 **Ultima actualizacion:** 20/07/2026
-**Rama activa:** `dev`
-**Commit:** `7db2354` - "feat: prepare for npm publishing under @marcelo scope"
+**Rama activa:** `main`
+**Commit actual:** `69e95fd`
 
 ### Fases completadas
 
@@ -795,26 +795,41 @@ FASE 12 Post-publicacion (verificar + documentar)
 | FASE 8 | COMPLETADA | `npm pack --dry-run` verificado en los 6 paquetes |
 | FASE 9 | COMPLETADA | Commit + push a `origin/dev` |
 | FASE 9.5 | COMPLETADA | Test local: toolkit resuelve agentes OK, detecta Ollama |
+| FASE 10 | COMPLETADA | Merge `dev` -> `main` + push (fast-forward) |
 
-### Fases pendientes
+### Fases pendientes (BLOQUEADAS)
 
 | Fase | Estado | Que hacer |
 |------|--------|-----------|
-| FASE 10 | PENDIENTE | Merge `dev` -> `main` + push |
-| FASE 11 | PENDIENTE | `npm login` + publicar 6 paquetes |
+| FASE 11 | BLOQUEADA | Publicar en npm - requiere resolver 2FA |
 | FASE 12 | PENDIENTE | Verificar en npmjs.com + tag + badges |
+
+### Bloqueador: 2FA en npm
+
+**Problema:** npm requiere Two-Factor Authentication (2FA) para publicar paquetes bajo el scope `@npm7381/` (usuario: `npm7381`).
+
+**Intentos fallidos:**
+- `npm login` via web (link expira, no genera .npmrc)
+- Token granular sin bypass 2FA
+- `--auth-type=legacy` no funciona con 2FA
+- `--otp` en publish no funciona con token que no tiene bypass
+
+**Solucion:** Crear un **Granular Access Token** en `https://www.npmjs.com/settings/npm7381/tokens` con:
+1. Packages and scopes: Read and write en `@npm7381` (o el scope que uses)
+2. Activar checkbox **"Bypass 2FA for packages"**
+3. Generate token y usarlo como `//registry.npmjs.org/:_authToken=<token>` en `.npmrc`
 
 ### Resumen de cambios aplicados
 
 **Archivos modificados:**
-- `toolkit/src/cli.ts` - createRequire + nombres `@marcelo/`
-- `toolkit/package.json` - namespace, campos, semver
-- `agent-doc-generator/package.json` - namespace, version, repository
-- `agent-test-generator/package.json` - namespace, version, repository
-- `agent-code-review/package.json` - namespace, version, repository
-- `agent-refactor/package.json` - namespace, version, repository
-- `agent-security-audit/package.json` - namespace, version, repository
-- `package.json` (raiz) - nombre actualizado
+- `toolkit/src/cli.ts` - createRequire + nombres `@npm7381/`
+- `toolkit/package.json` - namespace, campos, semver, dependencias `@npm7381/`
+- `agent-doc-generator/package.json` - namespace `@npm7381/`, version, repository
+- `agent-test-generator/package.json` - namespace `@npm7381/`, version, repository
+- `agent-code-review/package.json` - namespace `@npm7381/`, version, repository
+- `agent-refactor/package.json` - namespace `@npm7381/`, version, repository
+- `agent-security-audit/package.json` - namespace `@npm7381/`, version, repository
+- `package.json` (raiz) - nombre `@npm7381/ai-agent-toolkit-monorepo`
 
 **Archivos creados:**
 - `NPM_PUBLISH_PLAN.md` (este archivo)
@@ -843,6 +858,38 @@ FASE 12 Post-publicacion (verificar + documentar)
 
 ---
 
+## Como publicar manualmente
+
+```bash
+# 1. Build
+npm run build
+
+# 2. Publicar los 5 agentes (necesitas token con bypass 2FA)
+npm publish -w agent-doc-generator --access public
+npm publish -w agent-test-generator --access public
+npm publish -w agent-code-review --access public
+npm publish -w agent-refactor --access public
+npm publish -w agent-security-audit --access public
+
+# 3. Publicar toolkit (despues de los agentes)
+npm publish -w toolkit --access public
+
+# 4. Tag
+git tag v1.0.0 && git push origin v1.0.0
+```
+
+## Solucion 2FA
+
+1. Ir a https://www.npmjs.com/settings/npm7381/tokens
+2. Crear "Granular Access Token"
+3. Permisos: Read and write on `@npm7381`
+4. Activar "Bypass 2FA for packages"
+5. Copiar token y escribir en `~/.npmrc`:
+   ```
+   //registry.npmjs.org/:_authToken=npm_tu_token_aqui
+   ```
+6. Ejecutar `npm publish` sin `--otp`
+
 *Archivo generado el 20/07/2026 por OpenCode.*
 *Proyecto: ai-agent-toolkit*
-*Estado: FASES 1-9.5 COMPLETADAS - LISTO PARA MERGE Y PUBLICACION*
+*Estado: FASES 1-10 COMPLETADAS - FASE 11 BLOQUEADA POR 2FA DE NPM*
