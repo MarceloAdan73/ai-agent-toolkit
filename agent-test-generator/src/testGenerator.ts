@@ -24,7 +24,7 @@ export async function generateTests(
   }
 
   if (content.length > maxChars) {
-    console.warn(`[WARN] ${filePath}: ${content.length} chars truncado a ${maxChars}.`);
+    console.warn(`[WARN] ${filePath}: ${content.length} chars truncated to ${maxChars}.`);
   }
 
   const trimmedContent = content.length > maxChars
@@ -62,13 +62,12 @@ export async function generateTests(
       }
 
       if (attempt < MAX_RETRIES) {
-        console.warn(`[WARN] Attempt ${attempt} failed: ${error.message}. Retrying...`);
+        console.warn(`[WARN] Attempt ${attempt} failed. Retrying...`);
         await sleep(RETRY_DELAY_MS);
         continue;
       }
 
-      console.error(`[ERROR] All ${MAX_RETRIES} attempts failed for ${filePath}:`);
-      console.error(`  ${error.message}`);
+      console.error(`[ERROR] All ${MAX_RETRIES} attempts failed for ${filePath}: ${error.message}`);
       return null;
     }
   }

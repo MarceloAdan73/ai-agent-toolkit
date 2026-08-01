@@ -229,7 +229,7 @@ describe('generateDocumentation', () => {
     expect(warnSpy).toHaveBeenCalled();
     const warnMsg = warnSpy.mock.calls[0]![0] as string;
     expect(warnMsg).toContain('long.ts');
-    expect(warnMsg).toContain('truncado');
+    expect(warnMsg).toContain('truncated to');
     expect(warnMsg).toContain('20000');
     warnSpy.mockRestore();
   });

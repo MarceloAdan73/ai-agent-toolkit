@@ -124,7 +124,7 @@ async function main(): Promise<void> {
     console.log('[DRY-RUN] Preview mode active - no files will be written\n');
   }
 
-  const scanSpinner = ora('🔍 Resolviendo provider...').start();
+  const scanSpinner = ora('🔍 Resolving provider...').start();
 
   const resolved = await resolveProvider();
   const apiKey = options.apiKey || getApiKeyForProvider(resolved.provider);
@@ -287,7 +287,7 @@ async function main(): Promise<void> {
         const docRelative = path.relative(projectRoot, docPath);
         writeSpinner.succeed(`Documentation generated: ${docRelative}`);
       } else {
-        writeSpinner.fail('Error al escribir DOCS.md');
+        writeSpinner.fail('Error writing DOCS.md');
       }
     }
   }
