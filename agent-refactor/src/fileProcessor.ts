@@ -106,7 +106,7 @@ export function writeSingleDocFile(
 ): string | null {
   try {
     const docPath = path.join(targetDir, 'REFACTOR.md');
-    const lines = ['# Refactor Suggestions', '', `Generado: ${new Date().toLocaleDateString('es-AR')}`, '', '---', ''];
+    const lines = ['# Refactor Suggestions', '', `Generated: ${new Date().toLocaleDateString('en-US')}`, '', '---', ''];
 
     for (const entry of entries) {
       lines.push(`## ${entry.relativePath}`, '');

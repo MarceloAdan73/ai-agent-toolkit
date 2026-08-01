@@ -144,7 +144,7 @@ function generateMarkdownReport(entries: ReviewEntry[]): string {
   const lines: string[] = [
     '# Code Review Report',
     '',
-    `Generated: ${new Date().toLocaleDateString('es-AR')}`,
+    `Generated: ${new Date().toLocaleDateString('en-US')}`,
     '',
     '## Summary',
     '',
@@ -179,7 +179,7 @@ async function main(): Promise<void> {
   console.log('=== Agent Code Review v1.0.0 ===\n');
 
   if (dryRun) {
-    console.log('[DRY-RUN] Modo preview activo - no se escribirán archivos\n');
+    console.log('[DRY-RUN] Preview mode active - no files will be written\n');
   }
 
   const scanSpinner = ora('🔍 Resolviendo provider...').start();
@@ -205,7 +205,7 @@ async function main(): Promise<void> {
 
   if (verbose) {
     console.log(`[INFO] Provider: ${resolved.provider}`);
-    console.log(`[INFO] Modelo: ${resolved.model}`);
+    console.log(`[INFO] Model: ${resolved.model}`);
     console.log(`[INFO] Max chars: ${maxChars}`);
   }
 
@@ -213,16 +213,16 @@ async function main(): Promise<void> {
     ? options.extensions.split(',').map((e: string) => e.trim())
     : rcConfig?.extensions;
 
-  const filesSpinner = ora('🔍 Escaneando archivos...').start();
+  const filesSpinner = ora('🔍 Scanning files...').start();
   const files = collectFiles(options.path, verbose, extensions);
 
   if (files.length === 0) {
-    filesSpinner.warn('No se encontraron archivos soportados para procesar.');
+    filesSpinner.warn('No supported files found to process.');
     process.exitCode = 0;
     return;
   }
 
-  filesSpinner.succeed(`Encontrados ${files.length} archivo(s) para revisar.`);
+  filesSpinner.succeed(`Found ${files.length} file(s) to review.`);
 
   const projectRoot = process.cwd();
   const cache = loadCache(projectRoot);
@@ -241,7 +241,7 @@ async function main(): Promise<void> {
     try {
       const fileData = readFile(filePath);
       if (!fileData || shouldSkipContent(fileData.content)) {
-        fileSpinner.warn(`Saltado (archivo vacío o no procesable)`);
+        fileSpinner.warn(`Skipped (empty or unprocessable file)`);
         skipped++;
         continue;
       }
@@ -260,7 +260,7 @@ async function main(): Promise<void> {
       }
 
       if (verbose) {
-        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generando review...`;
+        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generating review...`;
       }
 
       const reviewResults = await generateReview(ai, filePath, fileData.content, verbose, resolved.model, maxChars);
@@ -279,12 +279,12 @@ async function main(): Promise<void> {
           succeeded++;
         }
       } else {
-        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - No se pudo generar review`);
+        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Could not generate review`);
         failed++;
       }
     } catch (err) {
       const error = err as Error;
-      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error inesperado`);
+      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Unexpected error`);
       if (verbose) {
         console.error(`    ${error.message}`);
       }
@@ -294,7 +294,7 @@ async function main(): Promise<void> {
 
   if (!dryRun && reviewEntries.length > 0) {
     if (options.output) {
-      const writeSpinner = ora('📄 Escribiendo reporte...').start();
+      const writeSpinner = ora('📄 Writing report...').start();
       const outputPath = path.resolve(options.output);
 
       const format = mergeConfig(options.format, rcConfig?.format as 'terminal' | 'markdown' | 'html' | 'pdf' | undefined, 'terminal');
@@ -302,22 +302,22 @@ async function main(): Promise<void> {
         const markdown = generateMarkdownReport(reviewEntries);
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, markdown, 'utf-8');
-        writeSpinner.succeed(`Reporte guardado: ${outputPath}`);
+        writeSpinner.succeed(`Report saved: ${outputPath}`);
       } else if (format === 'html') {
         const htmlOutput = outputPath.endsWith('.html') ? outputPath : outputPath + '.html';
         const html = generateHtmlReport(reviewEntries, 'Agent Code Review');
         fs.mkdirSync(path.dirname(htmlOutput), { recursive: true });
         fs.writeFileSync(htmlOutput, html, 'utf-8');
-        writeSpinner.succeed(`Reporte HTML guardado: ${htmlOutput}`);
+        writeSpinner.succeed(`HTML report saved: ${htmlOutput}`);
       } else if (format === 'pdf') {
         const pdfOutput = outputPath.endsWith('.pdf') ? outputPath : outputPath + '.pdf';
         fs.mkdirSync(path.dirname(pdfOutput), { recursive: true });
         await generatePdfReport(reviewEntries, pdfOutput, 'Agent Code Review');
-        writeSpinner.succeed(`Reporte PDF guardado: ${pdfOutput}`);
+        writeSpinner.succeed(`PDF report saved: ${pdfOutput}`);
       } else {
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });
         fs.writeFileSync(outputPath, JSON.stringify(reviewEntries, null, 2), 'utf-8');
-        writeSpinner.succeed(`Reporte guardado: ${outputPath}`);
+        writeSpinner.succeed(`Report saved: ${outputPath}`);
       }
     } else {
       printTerminalReport(reviewEntries);
@@ -328,7 +328,7 @@ async function main(): Promise<void> {
     saveCache(projectRoot, cache);
   }
 
-  console.log('=== Resumen ===');
+  console.log('=== Summary ===');
   console.log(`  Total:    ${files.length}`);
   console.log(`  ✅ OK:    ${succeeded}`);
   console.log(`  ⚠️  Skip:   ${skipped}`);
@@ -345,13 +345,13 @@ async function main(): Promise<void> {
 
 main().catch((err) => {
   const error = err as Error;
-  console.error(`[FATAL] Error inesperado: ${error.message}`);
+  console.error(`[FATAL] Unexpected error: ${error.message}`);
   exitGracefully(1);
 });
 
-// En Windows, process.exit() con writes pendientes en stdout/stderr aborta con
-// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". Esperamos a que
-// drenen los streams antes de forzar la salida.
+// On Windows, process.exit() with pending stdout/stderr writes aborts with
+// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". We wait for the
+// streams to drain before forcing the exit.
 function exitGracefully(code: number): void {
   process.exitCode = code;
   process.stdout.write('', () => {
