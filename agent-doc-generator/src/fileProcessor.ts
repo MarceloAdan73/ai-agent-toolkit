@@ -106,7 +106,7 @@ export function writeSingleDocFile(
 ): string | null {
   try {
     const docPath = path.join(targetDir, 'DOCS.md');
-    const lines = ['# Documentación del Proyecto', '', `Generado: ${new Date().toLocaleDateString('es-AR')}`, '', '---', ''];
+    const lines = ['# Project Documentation', '', `Generated: ${new Date().toLocaleDateString('en-US')}`, '', '---', ''];
 
     for (const entry of entries) {
       lines.push(`## ${entry.relativePath}`, '');

@@ -121,7 +121,7 @@ async function main(): Promise<void> {
   console.log('=== Agent Test Generator v2.0.0 ===\n');
 
   if (dryRun) {
-    console.log('[DRY-RUN] Modo preview activo - no se escribirán archivos\n');
+    console.log('[DRY-RUN] Preview mode active - no files will be written\n');
   }
 
   const scanSpinner = ora('🔍 Resolviendo provider...').start();
@@ -147,25 +147,25 @@ async function main(): Promise<void> {
 
   if (verbose) {
     console.log(`[INFO] Provider: ${resolved.provider}`);
-    console.log(`[INFO] Modelo: ${resolved.model}`);
+    console.log(`[INFO] Model: ${resolved.model}`);
     console.log(`[INFO] Max chars: ${maxChars}`);
-    console.log(`[INFO] Modo: ${splitMode ? 'split (archivo por archivo)' : 'single (TESTS.md único)'}`);
+    console.log(`[INFO] Mode: ${splitMode ? 'split (one file per source)' : 'single (one TESTS.md)'}`);
   }
 
   const extensions = options.extensions
     ? options.extensions.split(',').map((e: string) => e.trim())
     : rcConfig?.extensions;
 
-  const filesSpinner = ora('🔍 Escaneando archivos...').start();
+  const filesSpinner = ora('🔍 Scanning files...').start();
   const files = collectFiles(options.path, verbose, extensions);
 
   if (files.length === 0) {
-    filesSpinner.warn('No se encontraron archivos soportados para procesar.');
+    filesSpinner.warn('No supported files found to process.');
     process.exitCode = 0;
     return;
   }
 
-  filesSpinner.succeed(`Encontrados ${files.length} archivo(s) para generar tests.`);
+  filesSpinner.succeed(`Found ${files.length} file(s) to generate tests for.`);
 
   const projectRoot = process.cwd();
   const cache = loadCache(projectRoot);
@@ -184,7 +184,7 @@ async function main(): Promise<void> {
     try {
       const fileData = readFile(filePath);
       if (!fileData || shouldSkipContent(fileData.content)) {
-        fileSpinner.warn(`Saltado (archivo vacío o no procesable)`);
+        fileSpinner.warn(`Skipped (empty or unprocessable file)`);
         skipped++;
         continue;
       }
@@ -212,7 +212,7 @@ async function main(): Promise<void> {
       }
 
       if (verbose) {
-        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generando tests...`;
+        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generating tests...`;
       }
 
       const testRaw = await generateTests(ai, filePath, fileData.content, verbose, resolved.model, maxChars);
@@ -234,7 +234,7 @@ async function main(): Promise<void> {
               updateCache(filePath, testFilePath, currentHash, cache);
               succeeded++;
             } else {
-              fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error al escribir test`);
+              fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error writing test`);
               failed++;
             }
           } else {
@@ -250,12 +250,12 @@ async function main(): Promise<void> {
           }
         }
       } else {
-        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - No se pudieron generar tests`);
+        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Could not generate tests`);
         failed++;
       }
     } catch (err) {
       const error = err as Error;
-      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error inesperado`);
+      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Unexpected error`);
       if (verbose) {
         console.error(`    ${error.message}`);
       }
@@ -268,26 +268,26 @@ async function main(): Promise<void> {
     const targetDir = resolveTargetDir(options.path, options.output);
 
     if (format === 'html') {
-      const writeSpinner = ora('🧪 Escribiendo TESTS.html...').start();
+      const writeSpinner = ora('🧪 Writing TESTS.html...').start();
       const htmlPath = path.join(targetDir, 'TESTS.html');
       const content = buildSingleTestContent(testEntries);
-      const html = generateHtmlFromContent(content, 'Tests Generados', 'Agent Test Generator');
+      const html = generateHtmlFromContent(content, 'Generated Tests', 'Agent Test Generator');
       fs.writeFileSync(htmlPath, html, 'utf-8');
-      writeSpinner.succeed(`Tests HTML generados: ${path.relative(projectRoot, htmlPath)}`);
+      writeSpinner.succeed(`HTML tests generated: ${path.relative(projectRoot, htmlPath)}`);
     } else if (format === 'pdf') {
-      const writeSpinner = ora('🧪 Escribiendo TESTS.pdf...').start();
+      const writeSpinner = ora('🧪 Writing TESTS.pdf...').start();
       const pdfPath = path.join(targetDir, 'TESTS.pdf');
       const content = buildSingleTestContent(testEntries);
-      await generatePdfFromContent(content, pdfPath, 'Tests Generados', 'Agent Test Generator');
-      writeSpinner.succeed(`Tests PDF generados: ${path.relative(projectRoot, pdfPath)}`);
+      await generatePdfFromContent(content, pdfPath, 'Generated Tests', 'Agent Test Generator');
+      writeSpinner.succeed(`PDF tests generated: ${path.relative(projectRoot, pdfPath)}`);
     } else {
-      const writeSpinner = ora('🧪 Escribiendo TESTS.md...').start();
+      const writeSpinner = ora('🧪 Writing TESTS.md...').start();
       const testPath = writeSingleTestFile(targetDir, testEntries);
       if (testPath) {
         const testRelative = path.relative(projectRoot, testPath);
-        writeSpinner.succeed(`Tests generados: ${testRelative}`);
+        writeSpinner.succeed(`Tests generated: ${testRelative}`);
       } else {
-        writeSpinner.fail('Error al escribir TESTS.md');
+        writeSpinner.fail('Error writing TESTS.md');
       }
     }
   }
@@ -296,7 +296,7 @@ async function main(): Promise<void> {
     saveCache(projectRoot, cache);
   }
 
-  console.log('\n=== Resumen ===');
+  console.log('\n=== Summary ===');
   console.log(`  Total:    ${files.length}`);
   console.log(`  ✅ OK:    ${succeeded}`);
   console.log(`  ⚠️  Skip:   ${skipped}`);
@@ -313,13 +313,13 @@ async function main(): Promise<void> {
 
 main().catch((err) => {
   const error = err as Error;
-  console.error(`[FATAL] Error inesperado: ${error.message}`);
+  console.error(`[FATAL] Unexpected error: ${error.message}`);
   exitGracefully(1);
 });
 
-// En Windows, process.exit() con writes pendientes en stdout/stderr aborta con
-// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". Esperamos a que
-// drenen los streams antes de forzar la salida.
+// On Windows, process.exit() with pending stdout/stderr writes aborts with
+// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". We wait for the
+// streams to drain before forcing the exit.
 function exitGracefully(code: number): void {
   process.exitCode = code;
   process.stdout.write('', () => {
@@ -339,7 +339,7 @@ function resolveTargetDir(targetPath: string, output?: string): string {
 }
 
 function buildSingleTestContent(entries: { relativePath: string; content: string }[]): string {
-  const lines = ['# Tests Generados', '', `Generado: ${new Date().toLocaleDateString('es-AR')}`, '', '---', ''];
+  const lines = ['# Generated Tests', '', `Generated: ${new Date().toLocaleDateString('en-US')}`, '', '---', ''];
   for (const entry of entries) {
     lines.push(`## ${entry.relativePath}`, '');
     lines.push('```typescript');

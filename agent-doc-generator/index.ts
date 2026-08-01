@@ -121,7 +121,7 @@ async function main(): Promise<void> {
   console.log('=== Agent Doc Generator v2.1.0 ===\n');
 
   if (dryRun) {
-    console.log('[DRY-RUN] Modo preview activo - no se escribirán archivos\n');
+    console.log('[DRY-RUN] Preview mode active - no files will be written\n');
   }
 
   const scanSpinner = ora('🔍 Resolviendo provider...').start();
@@ -147,25 +147,25 @@ async function main(): Promise<void> {
 
   if (verbose) {
     console.log(`[INFO] Provider: ${resolved.provider}`);
-    console.log(`[INFO] Modelo: ${resolved.model}`);
+    console.log(`[INFO] Model: ${resolved.model}`);
     console.log(`[INFO] Max chars: ${maxChars}`);
-    console.log(`[INFO] Modo: ${splitMode ? 'split (archivo por archivo)' : 'single (DOCS.md único)'}`);
+    console.log(`[INFO] Mode: ${splitMode ? 'split (one file per source)' : 'single (one DOCS.md)'}`);
   }
 
   const extensions = options.extensions
     ? options.extensions.split(',').map((e: string) => e.trim())
     : rcConfig?.extensions;
 
-  const filesSpinner = ora('🔍 Escaneando archivos...').start();
+  const filesSpinner = ora('🔍 Scanning files...').start();
   const files = collectFiles(options.path, verbose, extensions);
 
   if (files.length === 0) {
-    filesSpinner.warn('No se encontraron archivos soportados para procesar.');
+    filesSpinner.warn('No supported files found to process.');
     process.exitCode = 0;
     return;
   }
 
-  filesSpinner.succeed(`Encontrados ${files.length} archivo(s) para procesar.`);
+  filesSpinner.succeed(`Found ${files.length} file(s) to process.`);
 
   const projectRoot = process.cwd();
   const cache = loadCache(projectRoot);
@@ -184,7 +184,7 @@ async function main(): Promise<void> {
     try {
       const fileData = readFile(filePath);
       if (!fileData || shouldSkipContent(fileData.content)) {
-        fileSpinner.warn(`Saltado (archivo vacío o no procesable)`);
+        fileSpinner.warn(`Skipped (empty or unprocessable file)`);
         skipped++;
         continue;
       }
@@ -212,7 +212,7 @@ async function main(): Promise<void> {
       }
 
       if (verbose) {
-        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generando documentación...`;
+        fileSpinner.text = `[${i + 1}/${files.length}] ${relativePath} - Generating documentation...`;
       }
 
       const docRaw = await generateDocumentation(ai, filePath, fileData.content, verbose, resolved.model, maxChars);
@@ -234,7 +234,7 @@ async function main(): Promise<void> {
               updateCache(filePath, docFilePath, currentHash, cache);
               succeeded++;
             } else {
-              fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error al escribir doc`);
+              fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error writing doc`);
               failed++;
             }
           } else {
@@ -250,12 +250,12 @@ async function main(): Promise<void> {
           }
         }
       } else {
-        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - No se pudo generar documentación`);
+        fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Could not generate documentation`);
         failed++;
       }
     } catch (err) {
       const error = err as Error;
-      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Error inesperado`);
+      fileSpinner.fail(`[${i + 1}/${files.length}] ${relativePath} - Unexpected error`);
       if (verbose) {
         console.error(`    ${error.message}`);
       }
@@ -268,24 +268,24 @@ async function main(): Promise<void> {
     const targetDir = resolveTargetDir(options.path, options.output);
 
     if (format === 'html') {
-      const writeSpinner = ora('📄 Escribiendo DOCS.html...').start();
+      const writeSpinner = ora('📄 Writing DOCS.html...').start();
       const htmlPath = path.join(targetDir, 'DOCS.html');
       const content = buildSingleDocContent(docEntries);
-      const html = generateHtmlFromContent(content, 'Documentación del Proyecto', 'Agent Doc Generator');
+      const html = generateHtmlFromContent(content, 'Project Documentation', 'Agent Doc Generator');
       fs.writeFileSync(htmlPath, html, 'utf-8');
-      writeSpinner.succeed(`Documentación HTML generada: ${path.relative(projectRoot, htmlPath)}`);
+      writeSpinner.succeed(`HTML documentation generated: ${path.relative(projectRoot, htmlPath)}`);
     } else if (format === 'pdf') {
-      const writeSpinner = ora('📄 Escribiendo DOCS.pdf...').start();
+      const writeSpinner = ora('📄 Writing DOCS.pdf...').start();
       const pdfPath = path.join(targetDir, 'DOCS.pdf');
       const content = buildSingleDocContent(docEntries);
-      await generatePdfFromContent(content, pdfPath, 'Documentación del Proyecto', 'Agent Doc Generator');
-      writeSpinner.succeed(`Documentación PDF generada: ${path.relative(projectRoot, pdfPath)}`);
+      await generatePdfFromContent(content, pdfPath, 'Project Documentation', 'Agent Doc Generator');
+      writeSpinner.succeed(`PDF documentation generated: ${path.relative(projectRoot, pdfPath)}`);
     } else {
-      const writeSpinner = ora('📄 Escribiendo DOCS.md...').start();
+      const writeSpinner = ora('📄 Writing DOCS.md...').start();
       const docPath = writeSingleDocFile(targetDir, docEntries);
       if (docPath) {
         const docRelative = path.relative(projectRoot, docPath);
-        writeSpinner.succeed(`Documentación generada: ${docRelative}`);
+        writeSpinner.succeed(`Documentation generated: ${docRelative}`);
       } else {
         writeSpinner.fail('Error al escribir DOCS.md');
       }
@@ -296,7 +296,7 @@ async function main(): Promise<void> {
     saveCache(projectRoot, cache);
   }
 
-  console.log('\n=== Resumen ===');
+  console.log('\n=== Summary ===');
   console.log(`  Total:    ${files.length}`);
   console.log(`  ✅ OK:    ${succeeded}`);
   console.log(`  ⚠️  Skip:   ${skipped}`);
@@ -313,13 +313,13 @@ async function main(): Promise<void> {
 
 main().catch((err) => {
   const error = err as Error;
-  console.error(`[FATAL] Error inesperado: ${error.message}`);
+  console.error(`[FATAL] Unexpected error: ${error.message}`);
   exitGracefully(1);
 });
 
-// En Windows, process.exit() con writes pendientes en stdout/stderr aborta con
-// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". Esperamos a que
-// drenen los streams antes de forzar la salida.
+// On Windows, process.exit() with pending stdout/stderr writes aborts with
+// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". We wait for the
+// streams to drain before forcing the exit.
 function exitGracefully(code: number): void {
   process.exitCode = code;
   process.stdout.write('', () => {
@@ -339,7 +339,7 @@ function resolveTargetDir(targetPath: string, output?: string): string {
 }
 
 function buildSingleDocContent(entries: { relativePath: string; content: string }[]): string {
-  const lines = ['# Documentación del Proyecto', '', `Generado: ${new Date().toLocaleDateString('es-AR')}`, '', '---', ''];
+  const lines = ['# Project Documentation', '', `Generated: ${new Date().toLocaleDateString('en-US')}`, '', '---', ''];
   for (const entry of entries) {
     lines.push(`## ${entry.relativePath}`, '');
     lines.push(entry.content);

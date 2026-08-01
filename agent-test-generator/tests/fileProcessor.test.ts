@@ -128,7 +128,7 @@ describe('fileProcessor', () => {
       const testPath = writeSingleTestFile(tmpDir, entries);
       expect(testPath).toBe(path.join(tmpDir, 'TESTS.md'));
       const content = fs.readFileSync(testPath!, 'utf-8');
-      expect(content).toContain('# Tests Generados');
+      expect(content).toContain('# Generated Tests');
       expect(content).toContain('src/a.ts');
       expect(content).toContain('describe("a", () => {})');
       expect(content).toContain('src/b.ts');

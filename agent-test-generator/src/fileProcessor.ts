@@ -117,7 +117,7 @@ export function writeSingleTestFile(
 ): string | null {
   try {
     const testPath = path.join(targetDir, 'TESTS.md');
-    const lines = ['# Tests Generados', '', `Generado: ${new Date().toLocaleDateString('es-AR')}`, '', '---', ''];
+    const lines = ['# Generated Tests', '', `Generated: ${new Date().toLocaleDateString('en-US')}`, '', '---', ''];
 
     for (const entry of entries) {
       lines.push(`## ${entry.relativePath}`, '');

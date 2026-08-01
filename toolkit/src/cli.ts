@@ -21,30 +21,30 @@ const VERSION = '1.0.0';
 function showGeneralHelp(): void {
   console.log(`
 AI Agent Toolkit v${VERSION}
-Uso: ai-toolkit <comando> [opciones]
+Usage: ai-toolkit <command> [options]
 
-Comandos:
-  doc       Generar documentación del código
-            Ej: ai-toolkit doc --path ./src
+Commands:
+  doc       Generate code documentation
+            e.g. ai-toolkit doc --path ./src
 
-  review    Revisar calidad del código
-            Ej: ai-toolkit review --path ./src --format html
+  review    Review code quality
+            e.g. ai-toolkit review --path ./src --format html
 
-  test      Generar tests unitarios
-            Ej: ai-toolkit test --path ./src
+  test      Generate unit tests
+            e.g. ai-toolkit test --path ./src
 
-  refactor  Sugerir y aplicar refactorizaciones
-            Ej: ai-toolkit refactor --path ./src --apply
+  refactor  Suggest and apply refactors
+            e.g. ai-toolkit refactor --path ./src --apply
 
-  audit     Auditar seguridad (OWASP Top 10)
-            Ej: ai-toolkit audit --path ./src --severity critical
+  audit     Security audit (OWASP Top 10)
+            e.g. ai-toolkit audit --path ./src --severity critical
 
-Opciones generales:
-  --help, -h    Muestra ayuda
-  --version, -v Muestra versión
+General options:
+  --help, -h    Shows help
+  --version, -v Shows version
 
-Más información:
-  ai-toolkit <comando> --help
+More information:
+  ai-toolkit <command> --help
 `);
 }
 
@@ -61,7 +61,7 @@ if (!subcommand || subcommand === '--help' || subcommand === '-h') {
 function runAgent(subcommand: string): void {
   const agentName = AGENTS[subcommand];
   if (!agentName) {
-    console.error(`Comando desconocido: "${subcommand}". Usa "ai-toolkit --help" para ver los comandos disponibles.`);
+    console.error(`Unknown command: "${subcommand}". Run "ai-toolkit --help" to see available commands.`);
     process.exitCode = 1;
     return;
   }

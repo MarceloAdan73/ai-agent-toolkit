@@ -10,7 +10,7 @@ const openaiKey = process.env.OPENAI_API_KEY;
 const anthropicKey = process.env.ANTHROPIC_API_KEY;
 const deepseekKey = process.env.DEEPSEEK_API_KEY;
 
-const SIMPLE_PROMPT = 'Responde solo con la palabra "OK" sin explicaciones.';
+const SIMPLE_PROMPT = 'Reply only with the word "OK" without explanations.';
 
 async function testProvider(provider: string, apiKey: string | undefined, model: string): Promise<void> {
   const client = createAIClient({ provider, apiKey });
@@ -48,14 +48,14 @@ describe('End-to-End Integration', () => {
     const client = createAIClient({ provider: 'gemini', apiKey: geminiKey });
     expect(client).not.toBeNull();
 
-    const prompt = `Eres un revisor de código. Analiza este código y responde SOLO con un JSON array.
+    const prompt = `You are a code reviewer. Analyze this code and respond ONLY with a JSON array.
 
-Código:
+Code:
 function add(a, b) {
   return a + b;
 }
 
-Devuelve: [{"severity":"info","category":"test","suggestion":"test"}]`;
+Return: [{"severity":"info","category":"test","suggestion":"test"}]`;
     const result = await client!.generate(prompt, 'gemini-2.5-flash');
     expect(result).not.toBeNull();
     expect(result!.length).toBeGreaterThan(10);

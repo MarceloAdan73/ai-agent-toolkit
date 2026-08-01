@@ -15,8 +15,8 @@ describe('htmlFormatter', () => {
 
   it('includes summary cards with 0 counts for empty entries', () => {
     const html = generateHtmlReport([], 'Agent Code Review');
-    expect(html).toContain('Críticos');
-    expect(html).toContain('Advertencias');
+    expect(html).toContain('Critical');
+    expect(html).toContain('Warnings');
     expect(html).toContain('Info');
   });
 

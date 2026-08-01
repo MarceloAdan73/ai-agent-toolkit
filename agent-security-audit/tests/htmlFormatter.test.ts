@@ -31,7 +31,7 @@ describe('htmlFormatter', () => {
 
   it('includes summary cards', () => {
     const html = generateHtmlReport([], 'Agent Security Audit');
-    expect(html).toContain('Críticos');
-    expect(html).toContain('Advertencias');
+    expect(html).toContain('Critical');
+    expect(html).toContain('Warnings');
   });
 });

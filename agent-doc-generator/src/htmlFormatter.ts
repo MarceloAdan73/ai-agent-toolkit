@@ -1,6 +1,6 @@
 export function generateHtmlFromContent(content: string, title: string, agentName: string): string {
   return `<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,7 @@ export function generateHtmlFromContent(content: string, title: string, agentNam
   <div class="container">
     <header>
       <h1>${title}</h1>
-      <p class="meta">Generado: ${new Date().toLocaleString('es-AR')} • ${agentName}</p>
+      <p class="meta">Generated: ${new Date().toLocaleString('en-US')} • ${agentName}</p>
     </header>
     <div class="content">${content.split('\n').map(line => {
       if (line.startsWith('# ')) return `<h1>${line.slice(2)}</h1>`;
