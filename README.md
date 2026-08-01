@@ -21,7 +21,7 @@
 [![npm refactor](https://img.shields.io/npm/v/@aiagentkit/agent-refactor?style=flat-square&label=refactor)](https://www.npmjs.com/package/@aiagentkit/agent-refactor)
 [![npm security-audit](https://img.shields.io/npm/v/@aiagentkit/agent-security-audit?style=flat-square&label=security-audit)](https://www.npmjs.com/package/@aiagentkit/agent-security-audit)
 
-[📦 Installation](#-installation) · [🤖 Agents](#-agents) · [🧠 Providers](#-supported-ai-providers) · [⚙️ CLI Flags](#%EF%B8%8F-cli-flags) · [🤝 Contributing](#-contributing)
+[🎬 Demo](#-see-it-in-action) · [⚡ Quick Start](#-quick-start) · [📦 Installation](#-installation) · [🤖 Agents](#-agents) · [🧠 Providers](#-supported-ai-providers) · [⚙️ CLI Flags](#%EF%B8%8F-cli-flags) · [🤝 Contributing](#-contributing)
 
 </div>
 
@@ -37,6 +37,52 @@ npx ai-toolkit test      ./src   # 🧪 unit tests
 npx ai-toolkit review    ./src   # 🔍 code review
 npx ai-toolkit refactor  ./src   # ♻️ refactoring
 npx ai-toolkit audit     ./src   # 🛡️ security audit
+```
+
+---
+
+## 🎬 See it in action
+
+One command turns an undocumented file into documented code — here with a local Ollama model, no API key needed:
+
+```bash
+$ npx ai-toolkit doc --path ./src --provider ollama
+=== Agent Doc Generator v2.1.0 ===
+✔ Provider: ollama | Model: qwen2.5-coder:1.5b
+✔ Found 1 file(s) to process.
+✔ [1/1] src/userService.ts → [DOC]
+✔ Documentation generated: DOCS.md
+```
+
+**Before** — `userService.ts` without docs:
+
+```ts
+export class UserService {
+  private users: User[] = [];
+
+  addUser(name: string, email: string): User {
+    const user: User = { id: this.users.length + 1, name, email };
+    this.users.push(user);
+    return user;
+  }
+}
+```
+
+**After** — `DOCS.md`, generated automatically:
+
+```ts
+/**
+ * Adds a new user to the service.
+ *
+ * @param {string} name - The name of the user.
+ * @param {string} email - The email address of the user.
+ * @returns {User} The added user object.
+ */
+addUser(name: string, email: string): User {
+  const user: User = { id: this.users.length + 1, name, email };
+  this.users.push(user);
+  return user;
+}
 ```
 
 ---
@@ -107,6 +153,26 @@ cp .env.example .env
 # ▶️ Run
 node toolkit/dist/cli.js doc --path ./src
 ```
+
+---
+
+## ⚡ Quick Start
+
+**The problem:** you have a legacy repo with 50 undocumented files and no time to write JSDoc by hand (~4 hours of work).
+
+**The fix:** one command.
+
+```bash
+# 1. Install the toolkit once
+npm install -g @aiagentkit/ai-agent-toolkit
+
+# 2. Document your whole src/ folder (auto-detects provider, or set one)
+npx ai-toolkit doc --path ./src
+
+# 3. Get a single DOCS.md with every public API documented
+```
+
+> 💡 Try it locally with no API key at all: install [Ollama](https://ollama.com), pull a model (`ollama pull qwen2.5-coder:1.5b`), and run with `--provider ollama`.
 
 ---
 
