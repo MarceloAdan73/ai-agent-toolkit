@@ -5,6 +5,7 @@ import os from 'os';
 import {
   detectProvider,
   detectOllama,
+  pickOllamaChatModel,
   loadConfig,
   saveConfig,
   getDefaultModel,
@@ -55,6 +56,37 @@ describe('providerDetector', () => {
         expect(result!.provider).toBe('ollama');
         expect(result!.model).toBe('qwen2.5-coder:1.5b');
         expect(result!.baseUrl).toBe('http://localhost:11434');
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+    });
+
+    it('skips embedding models and picks a chat-capable Ollama model', async () => {
+      const originalFetch = globalThis.fetch;
+      globalThis.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ models: [{ name: 'nomic-embed-text:latest' }, { name: 'llama3' }] }),
+      } as any);
+      try {
+        const result = await detectProvider({ env: {} });
+        expect(result).not.toBeNull();
+        expect(result!.provider).toBe('ollama');
+        expect(result!.model).toBe('llama3');
+        expect(result!.baseUrl).toBe('http://localhost:11434');
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+    });
+
+    it('returns null when Ollama only has embedding models', async () => {
+      const originalFetch = globalThis.fetch;
+      globalThis.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => ({ models: [{ name: 'nomic-embed-text:latest' }] }),
+      } as any);
+      try {
+        const result = await detectProvider({ env: {} });
+        expect(result).toBeNull();
       } finally {
         globalThis.fetch = originalFetch;
       }
@@ -141,6 +173,24 @@ describe('providerDetector', () => {
       } finally {
         globalThis.fetch = originalFetch;
       }
+    });
+  });
+
+  describe('pickOllamaChatModel', () => {
+    it('returns null for an empty list', () => {
+      expect(pickOllamaChatModel([])).toBeNull();
+    });
+
+    it('skips embedding models and picks the first chat model', () => {
+      expect(pickOllamaChatModel(['nomic-embed-text:latest', 'llama3'])).toBe('llama3');
+    });
+
+    it('returns null when all models are embeddings', () => {
+      expect(pickOllamaChatModel(['nomic-embed-text:latest', 'mxbai-embed-large'])).toBeNull();
+    });
+
+    it('returns the first non-embedding model', () => {
+      expect(pickOllamaChatModel(['qwen2.5-coder:1.5b', 'llama3'])).toBe('qwen2.5-coder:1.5b');
     });
   });
 
