@@ -27,6 +27,14 @@ const DEFAULT_MODELS: Record<string, string> = {
 
 const OLLAMA_DEFAULT_URL = 'http://localhost:11434';
 
+const EMBEDDING_MODEL_PATTERN =
+  /embed|minilm|mxbai|bge[-_]|gte[-_]|nomic|snowflake-arctic|e5[-_]|clip$/i;
+
+export function pickOllamaChatModel(models: string[]): string | null {
+  const chatModel = models.find((m) => !EMBEDDING_MODEL_PATTERN.test(m));
+  return chatModel ?? null;
+}
+
 export async function detectProvider(options: DetectOptions = {}): Promise<ProviderConfig | null> {
   const env = options.env ?? process.env;
   const ollamaBaseUrl = options.ollamaBaseUrl ?? OLLAMA_DEFAULT_URL;
@@ -69,14 +77,17 @@ export async function detectProvider(options: DetectOptions = {}): Promise<Provi
 
   const ollamaModels = await detectOllama(ollamaBaseUrl);
   if (ollamaModels && ollamaModels.length > 0) {
-    const model = ollamaModels[0];
-    return {
-      provider: 'ollama',
-      model,
-      baseUrl: ollamaBaseUrl,
-      autoDetected: true,
-      detectedAt: new Date().toISOString(),
-    };
+    const model = pickOllamaChatModel(ollamaModels);
+    if (model) {
+      return {
+        provider: 'ollama',
+        model,
+        baseUrl: ollamaBaseUrl,
+        autoDetected: true,
+        detectedAt: new Date().toISOString(),
+      };
+    }
+    return null;
   }
 
   if (ollamaModels === null) {
