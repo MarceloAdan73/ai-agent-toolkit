@@ -206,7 +206,8 @@ async function main(): Promise<void> {
 
   if (!ai) {
     printDetectionResult(null, verbose);
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
 
   if (verbose) {
@@ -225,7 +226,8 @@ async function main(): Promise<void> {
 
   if (files.length === 0) {
     filesSpinner.warn('No se encontraron archivos soportados para procesar.');
-    process.exit(0);
+    process.exitCode = 0;
+    return;
   }
 
   filesSpinner.succeed(`Encontrados ${files.length} archivo(s) para auditar.`);
@@ -347,15 +349,25 @@ async function main(): Promise<void> {
   console.log('');
 
   if (failed > 0) {
-    process.exit(1);
+    process.exitCode = 1;
   }
 }
 
 main().catch((err) => {
   const error = err as Error;
   console.error(`[FATAL] Error inesperado: ${error.message}`);
-  process.exit(1);
+  exitGracefully(1);
 });
+
+// En Windows, process.exit() con writes pendientes en stdout/stderr aborta con
+// "Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)". Esperamos a que
+// drenen los streams antes de forzar la salida.
+function exitGracefully(code: number): void {
+  process.exitCode = code;
+  process.stdout.write('', () => {
+    process.stderr.write('', () => process.exit(code));
+  });
+}
 
 function resolveTargetDir(targetPath: string, output?: string): string {
   const resolvedOutput = output ?? rcConfig?.output;

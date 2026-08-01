@@ -52,25 +52,30 @@ const subcommand = process.argv[2];
 
 if (!subcommand || subcommand === '--help' || subcommand === '-h') {
   showGeneralHelp();
-  process.exit(0);
-}
-
-if (subcommand === '--version' || subcommand === '-v') {
+} else if (subcommand === '--version' || subcommand === '-v') {
   console.log(VERSION);
-  process.exit(0);
+} else {
+  runAgent(subcommand);
 }
 
-const agentName = AGENTS[subcommand];
-if (!agentName) {
-  console.error(`Comando desconocido: "${subcommand}". Usa "ai-toolkit --help" para ver los comandos disponibles.`);
-  process.exit(1);
+function runAgent(subcommand: string): void {
+  const agentName = AGENTS[subcommand];
+  if (!agentName) {
+    console.error(`Comando desconocido: "${subcommand}". Usa "ai-toolkit --help" para ver los comandos disponibles.`);
+    process.exitCode = 1;
+    return;
+  }
+
+  const agentEntry = require.resolve(`${agentName}/dist/index.js`);
+  const childArgs = process.argv.slice(3);
+
+  const child = spawn(process.execPath, [agentEntry, ...childArgs], { stdio: 'inherit' });
+
+  // Usar 'close' (no 'exit') + process.exitCode: en Windows, process.exit()
+  // inmediato tras el exit del child aborta con "Assertion failed:
+  // !(handle->flags & UV_HANDLE_CLOSING)" porque quedan handles de libuv
+  // cerrando (stdio heredado). Con exitCode el proceso sale limpio.
+  child.on('close', (code) => {
+    process.exitCode = code ?? 1;
+  });
 }
-
-const agentEntry = require.resolve(`${agentName}/dist/index.js`);
-const childArgs = process.argv.slice(3);
-
-const child = spawn(process.execPath, [agentEntry, ...childArgs], { stdio: 'inherit' });
-
-child.on('exit', (code) => {
-  process.exit(code ?? 1);
-});
