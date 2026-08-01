@@ -22,7 +22,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 const program = new Command();
 
 program
-  .name('agent-doc-generator')
+  .name(process.env.AI_TOOLKIT_CMD ?? 'agent-doc-generator')
   .description('AI-powered documentation generator')
   .version('2.1.0')
   .requiredOption('--path <path>', 'Path to file or directory to document')
