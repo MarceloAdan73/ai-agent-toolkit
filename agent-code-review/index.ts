@@ -182,7 +182,7 @@ async function main(): Promise<void> {
     console.log('[DRY-RUN] Preview mode active - no files will be written\n');
   }
 
-  const scanSpinner = ora('🔍 Resolviendo provider...').start();
+  const scanSpinner = ora('🔍 Resolving provider...').start();
 
   const resolved = await resolveProvider();
   const apiKey = options.apiKey || getApiKeyForProvider(resolved.provider);

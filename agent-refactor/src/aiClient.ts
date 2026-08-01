@@ -15,6 +15,28 @@ export interface CreateAIClientOptions {
 const PLACEHOLDER_KEY = 'your_gemini_api_key_here';
 const DEFAULT_LOCAL_BASE_URL = 'http://localhost:11434';
 
+// Convierte el body de un error HTTP en una razon amigable de una sola linea.
+// Ollama y otros providers devuelven JSON tipo {"error": "..."}; si no es JSON,
+// se trunca el texto plano a 200 caracteres para no volcar respuestas gigantes.
+function formatApiError(providerLabel: string, status: number, body: string): string {
+  try {
+    const parsed = JSON.parse(body) as { error?: string | { message?: string }; message?: string };
+    const reason =
+      typeof parsed.error === 'string'
+        ? parsed.error
+        : typeof parsed.error === 'object' && parsed.error?.message
+          ? parsed.error.message
+          : typeof parsed.message === 'string'
+            ? parsed.message
+            : undefined;
+    if (reason) return `${providerLabel} API error ${status}: ${reason}`;
+  } catch {
+    // body no es JSON, usar texto plano truncado
+  }
+  const truncated = body.length > 200 ? `${body.slice(0, 200)}...` : body;
+  return `${providerLabel} API error ${status}: ${truncated || 'unknown error'}`;
+}
+
 export class GeminiClient implements AIClient {
   private ai: GoogleGenAI;
 
@@ -51,7 +73,7 @@ export class OpenAIClient implements AIClient {
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
-      throw new Error(`OpenAI API error ${res.status}: ${body}`);
+      throw new Error(formatApiError('OpenAI', res.status, body));
     }
 
     const data = (await res.json()) as {
@@ -85,7 +107,7 @@ export class AnthropicClient implements AIClient {
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
-      throw new Error(`Anthropic API error ${res.status}: ${body}`);
+      throw new Error(formatApiError('Anthropic', res.status, body));
     }
 
     const data = (await res.json()) as {
@@ -118,7 +140,7 @@ export class DeepSeekClient implements AIClient {
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
-      throw new Error(`DeepSeek API error ${res.status}: ${body}`);
+      throw new Error(formatApiError('DeepSeek', res.status, body));
     }
 
     const data = (await res.json()) as {
@@ -154,7 +176,7 @@ export class OllamaClient implements AIClient {
 
     if (!res.ok) {
       const body = await res.text().catch(() => '');
-      throw new Error(`Ollama API error ${res.status}: ${body}`);
+      throw new Error(formatApiError('Ollama', res.status, body));
     }
 
     const data = (await res.json()) as {
