@@ -22,7 +22,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 const program = new Command();
 
 program
-  .name('agent-code-review')
+  .name(process.env.AI_TOOLKIT_CMD ?? 'agent-code-review')
   .description('AI-powered code review tool')
   .version('1.0.0')
   .requiredOption('--path <path>', 'Path to file or directory to review')

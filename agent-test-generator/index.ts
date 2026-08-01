@@ -22,7 +22,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 const program = new Command();
 
 program
-  .name('agent-test-generator')
+  .name(process.env.AI_TOOLKIT_CMD ?? 'agent-test-generator')
   .description('AI-powered unit test generator')
   .version('2.0.0')
   .requiredOption('--path <path>', 'Path to file or directory to generate tests for')

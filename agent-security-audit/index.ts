@@ -22,7 +22,7 @@ dotenv.config({ path: path.join(__dirname, '.env') });
 const program = new Command();
 
 program
-  .name('agent-security-audit')
+  .name(process.env.AI_TOOLKIT_CMD ?? 'agent-security-audit')
   .description('AI-powered security audit tool (OWASP Top 10)')
   .version('1.0.0')
   .requiredOption('--path <path>', 'Path to file or directory to audit')

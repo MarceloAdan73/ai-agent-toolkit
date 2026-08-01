@@ -69,7 +69,12 @@ function runAgent(subcommand: string): void {
   const agentEntry = require.resolve(`${agentName}/dist/index.js`);
   const childArgs = process.argv.slice(3);
 
-  const child = spawn(process.execPath, [agentEntry, ...childArgs], { stdio: 'inherit' });
+  // Pasar el nombre publico al agente para que `--help` muestre
+  // "Usage: ai-toolkit <command>" en vez del nombre interno del paquete.
+  const child = spawn(process.execPath, [agentEntry, ...childArgs], {
+    stdio: 'inherit',
+    env: { ...process.env, AI_TOOLKIT_CMD: `ai-toolkit ${subcommand}` },
+  });
 
   // Usar 'close' (no 'exit') + process.exitCode: en Windows, process.exit()
   // inmediato tras el exit del child aborta con "Assertion failed:
