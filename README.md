@@ -5,11 +5,11 @@
 **🚀 Suite of 5 AI-powered CLI agents for automating software development workflows.**
 
 [![CI](https://github.com/MarceloAdan73/ai-agent-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/MarceloAdan73/ai-agent-toolkit/actions)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit)
+[![Version](https://img.shields.io/badge/version-1.0.2-blue?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=for-the-badge)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://typescriptlang.org)
-[![Tests](https://img.shields.io/badge/tests-596%20passing-brightgreen?style=for-the-badge)](https://vitest.dev)
+[![Tests](https://img.shields.io/badge/tests-626%20passing-brightgreen?style=for-the-badge)](https://vitest.dev)
 [![Agents](https://img.shields.io/badge/agents-5-active-brightgreen?style=for-the-badge)](#-agents)
 [![Providers](https://img.shields.io/badge/AI%20Providers-5-orange?style=for-the-badge)](#-supported-ai-providers)
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/MarceloAdan73/ai-agent-toolkit/pulls)
@@ -91,11 +91,11 @@ addUser(name: string, email: string): User {
 
 | Command | Package | Version | Description |
 |:-------:|---------|:-------:|-------------|
-| `ai-toolkit doc` | [`@aiagentkit/agent-doc-generator`](https://www.npmjs.com/package/@aiagentkit/agent-doc-generator) | v1.0.0 | 📄 Generates JSDoc documentation automatically |
-| `ai-toolkit test` | [`@aiagentkit/agent-test-generator`](https://www.npmjs.com/package/@aiagentkit/agent-test-generator) | v1.0.0 | 🧪 Generates unit tests with Vitest |
-| `ai-toolkit review` | [`@aiagentkit/agent-code-review`](https://www.npmjs.com/package/@aiagentkit/agent-code-review) | v1.0.0 | 🔍 Analyzes code quality and cyclomatic complexity |
-| `ai-toolkit refactor` | [`@aiagentkit/agent-refactor`](https://www.npmjs.com/package/@aiagentkit/agent-refactor) | v1.0.0 | ♻️ Suggests and applies refactorizations with diffs |
-| `ai-toolkit audit` | [`@aiagentkit/agent-security-audit`](https://www.npmjs.com/package/@aiagentkit/agent-security-audit) | v1.0.0 | 🛡️ OWASP Top 10 security audit |
+| `ai-toolkit doc` | [`@aiagentkit/agent-doc-generator`](https://www.npmjs.com/package/@aiagentkit/agent-doc-generator) | v1.0.1 | 📄 Generates JSDoc documentation automatically |
+| `ai-toolkit test` | [`@aiagentkit/agent-test-generator`](https://www.npmjs.com/package/@aiagentkit/agent-test-generator) | v1.0.1 | 🧪 Generates unit tests with Vitest |
+| `ai-toolkit review` | [`@aiagentkit/agent-code-review`](https://www.npmjs.com/package/@aiagentkit/agent-code-review) | v1.0.1 | 🔍 Analyzes code quality and cyclomatic complexity |
+| `ai-toolkit refactor` | [`@aiagentkit/agent-refactor`](https://www.npmjs.com/package/@aiagentkit/agent-refactor) | v1.0.1 | ♻️ Suggests and applies refactorizations with diffs |
+| `ai-toolkit audit` | [`@aiagentkit/agent-security-audit`](https://www.npmjs.com/package/@aiagentkit/agent-security-audit) | v1.0.1 | 🛡️ OWASP Top 10 security audit |
 
 > 💡 Each agent is an independent npm package. Install them separately or use the unified CLI.
 
@@ -146,9 +146,9 @@ git clone https://github.com/MarceloAdan73/ai-agent-toolkit.git
 cd ai-agent-toolkit
 npm install && npm run build
 
-# ⚙️ Configure a provider
-cp .env.example .env
-# Edit .env with your API key
+# ⚙️ Configure a provider (API keys are read from .env)
+echo "GEMINI_API_KEY=your_key" > .env
+# Or set any of: OPENAI_API_KEY, ANTHROPIC_API_KEY, DEEPSEEK_API_KEY
 
 # ▶️ Run
 node toolkit/dist/cli.js doc --path ./src
@@ -203,7 +203,7 @@ Each agent contains: `src/` (logic), `tests/` (Vitest), `index.ts` (entry point)
 | 🧠 AI Providers | Gemini, OpenAI, Anthropic, DeepSeek, Ollama |
 | 🖥️ CLI | Commander.js |
 | ⏳ Progress UI | ora |
-| 🧪 Testing | Vitest (596 tests) |
+| 🧪 Testing | Vitest (626 tests) |
 | 🔄 CI/CD | GitHub Actions |
 | 📦 Bundling | tsc (TypeScript compiler) |
 
@@ -248,7 +248,7 @@ Each agent contains: `src/` (logic), `tests/` (Vitest), `index.ts` (entry point)
 
 ```bash
 npm run build            # 🏗️ build all packages
-npm run test             # 🧪 596 tests
+npm run test             # 🧪 626 tests
 npm run typecheck        # 🔍 strict typecheck
 npm run test:integration # 🔗 tests with real providers (requires API keys)
 ```
@@ -257,7 +257,7 @@ npm run test:integration # 🔗 tests with real providers (requires API keys)
 
 ## 🗺️ Roadmap
 
-- [x] ✅ 5 functional agents with 596 tests
+- [x] ✅ 5 functional agents with 626 tests
 - [x] ✅ Unified CLI `ai-toolkit`
 - [x] ✅ Multi-provider + auto-detection
 - [x] ✅ Response caching
