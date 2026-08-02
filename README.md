@@ -32,11 +32,11 @@
 AI Agent Toolkit is a **monorepo** grouping 5 independent AI agents, each specialized in a different development task. They share a unified CLI, common stack, and support multiple AI providers.
 
 ```bash
-npx ai-toolkit doc       ./src   # 📄 automatic documentation
-npx ai-toolkit test      ./src   # 🧪 unit tests
-npx ai-toolkit review    ./src   # 🔍 code review
-npx ai-toolkit refactor  ./src   # ♻️ refactoring
-npx ai-toolkit audit     ./src   # 🛡️ security audit
+npx @aiagentkit/ai-agent-toolkit doc       ./src   # 📄 automatic documentation
+npx @aiagentkit/ai-agent-toolkit test      ./src   # 🧪 unit tests
+npx @aiagentkit/ai-agent-toolkit review    ./src   # 🔍 code review
+npx @aiagentkit/ai-agent-toolkit refactor  ./src   # ♻️ refactoring
+npx @aiagentkit/ai-agent-toolkit audit     ./src   # 🛡️ security audit
 ```
 
 ---
@@ -46,7 +46,7 @@ npx ai-toolkit audit     ./src   # 🛡️ security audit
 One command turns an undocumented file into documented code — here with a local Ollama model, no API key needed:
 
 ```bash
-$ npx ai-toolkit doc --path ./src --provider ollama
+$ npx @aiagentkit/ai-agent-toolkit doc --path ./src --provider ollama
 === Agent Doc Generator v2.1.0 ===
 ✔ Provider: ollama | Model: qwen2.5-coder:1.5b
 ✔ Found 1 file(s) to process.
@@ -117,8 +117,8 @@ Supports 5 providers with **automatic detection**. If you don't specify `--provi
 
 ```bash
 # 🎯 Specify provider explicitly
-npx ai-toolkit doc --path ./src --provider openai
-npx ai-toolkit audit --path ./src --provider ollama --model qwen2.5-coder:7b
+npx @aiagentkit/ai-agent-toolkit doc --path ./src --provider openai
+npx @aiagentkit/ai-agent-toolkit audit --path ./src --provider ollama --model qwen3.5:9b
 ```
 
 ---
@@ -129,7 +129,7 @@ npx ai-toolkit audit --path ./src --provider ollama --model qwen2.5-coder:7b
 
 ```bash
 npm install -g @aiagentkit/ai-agent-toolkit
-npx ai-toolkit doc --path ./src
+npx @aiagentkit/ai-agent-toolkit doc --path ./src
 ```
 
 Or install agents individually:
@@ -167,7 +167,7 @@ node toolkit/dist/cli.js doc --path ./src
 npm install -g @aiagentkit/ai-agent-toolkit
 
 # 2. Document your whole src/ folder (auto-detects provider, or set one)
-npx ai-toolkit doc --path ./src
+npx @aiagentkit/ai-agent-toolkit doc --path ./src
 
 # 3. Get a single DOCS.md with every public API documented
 ```
