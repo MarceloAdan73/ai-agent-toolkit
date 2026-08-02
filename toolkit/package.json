@@ -1,6 +1,6 @@
 {
   "name": "@aiagentkit/ai-agent-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "AI Agent Toolkit - CLI unificada para herramientas de desarrollo impulsadas por IA",
   "type": "module",
   "bin": {
@@ -15,11 +15,11 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@aiagentkit/agent-doc-generator": "^1.0.0",
-    "@aiagentkit/agent-test-generator": "^1.0.0",
-    "@aiagentkit/agent-code-review": "^1.0.0",
-    "@aiagentkit/agent-refactor": "^1.0.0",
-    "@aiagentkit/agent-security-audit": "^1.0.0"
+    "@aiagentkit/agent-doc-generator": "^1.0.1",
+    "@aiagentkit/agent-test-generator": "^1.0.1",
+    "@aiagentkit/agent-code-review": "^1.0.1",
+    "@aiagentkit/agent-refactor": "^1.0.1",
+    "@aiagentkit/agent-security-audit": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

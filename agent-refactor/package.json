@@ -1,6 +1,6 @@
 {
   "name": "@aiagentkit/agent-refactor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-powered refactoring tool that suggests and applies code refactorizations",
   "main": "dist/index.js",
   "bin": {

@@ -1,6 +1,6 @@
 {
   "name": "@aiagentkit/agent-doc-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-powered documentation generator for codebases",
   "main": "dist/index.js",
   "bin": {

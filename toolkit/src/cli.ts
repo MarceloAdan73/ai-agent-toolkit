@@ -16,7 +16,7 @@ const AGENTS: Record<string, string> = {
   audit: '@aiagentkit/agent-security-audit',
 };
 
-const VERSION = '1.0.0';
+const VERSION: string = require('../package.json').version;
 
 function showGeneralHelp(): void {
   console.log(`
