@@ -1,6 +1,6 @@
 {
   "name": "@aiagentkit/agent-code-review",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AI-powered code review tool that analyzes code quality and suggests improvements",
   "main": "dist/index.js",
   "bin": {
